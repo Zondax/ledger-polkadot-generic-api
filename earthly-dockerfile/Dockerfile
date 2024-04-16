@@ -5,7 +5,7 @@ FROM rust:1.74-bookworm as builder_rust
 WORKDIR /app
 
 RUN apt update && apt install -y nodejs curl
-RUN corepack enable
+RUN npm install --global yarn
 
 # Copy the Rust source files
 COPY rust ./rust
