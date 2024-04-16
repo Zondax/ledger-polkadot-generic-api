@@ -4,11 +4,12 @@ FROM rust:1.74-bookworm as builder_rust
 # Set the working directory in the container
 WORKDIR /app
 
+RUN apt update && apt install -y node curl
 
 # Copy the Rust source files
 COPY rust ./rust
 
-# Transpile TypeScript to JavaScript
+# Compile Rust project
 RUN yarn build:rust
 
 # Stage 1: Build Node
@@ -22,6 +23,10 @@ COPY package.json yarn.lock ./
 
 # Install dependencies
 RUN yarn install
+
+# Copy required Rust files
+COPY --from=builder_rust /app/rust/index.node ./rust/
+COPY --from=builder_rust /app/rust/index.d.ts ./rust/
 
 # Copy the TypeScript source files
 COPY src ./src
