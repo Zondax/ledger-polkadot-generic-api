@@ -26,6 +26,6 @@ parity-scale-codec = { version = "3.6.9", default-features = false, features = [
 ] }
 
 [dependencies.neon]
-version = "1.0.0-alpha.4"
+version = "1.0.0"
 default-features = false
 features = ["napi-8"]
