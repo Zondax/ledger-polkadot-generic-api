@@ -2,7 +2,7 @@ openapi: 3.0.0
 info:
   title: Ledger Polkadot Generic API
   description: This API provides a way to generate the required shortened metadata to sign a transaction on a Ledger device.
-  version: 1.1.0
+  version: 1.2.0
 servers:
   - url: https://api.zondax.ch/dot/generic
     description: Production server
@@ -18,8 +18,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Chains'
-  /{chainId}/metadata/flush:
-    get:
+  /node/metadata/flush:
+    post:
       summary: Flush cache
       description: Flush cache for a specific chain
       parameters:
@@ -29,13 +29,19 @@ paths:
           description: Ticket of the chain
           schema:
             type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ChainConfig'
       responses:
         '200':
           description: The cache was flushed successfully
         '404':
           description: Chain not found
-  /{chainId}/metadata:
-    get:
+  /node/metadata:
+    post:
       summary: Retrieve complete node metadata
       description: Retrieve and cache complete metadata for a specific chain
       parameters:
@@ -51,10 +57,10 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Metadata'
+                $ref: '#/components/schemas/ChainConfig'
         '404':
           description: Chain not found
-  /{chainId}/transaction/metadata:
+  /transaction/metadata:
     post:
       summary: Retrieve shortened metadata for a tx
       description: Retrieve shortened metadata, required to sign a tx on the ledger device
@@ -70,7 +76,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/TxToSign'
+              $ref: '#/components/schemas/TxPayload'
       responses:
         '200':
           description: Shortened metadata to sign tx
@@ -86,13 +92,44 @@ components:
       type: object
     ShortenedMetadata:
       type: object
-    TxToSign:
+    TxPayload:
       required:
-        - blob
+        - txBlob
+        - chainConfig
       properties:
-        blob:
+        txBlob:
           type: string
           description: Transaction payload to be signed, in serialized format
+        chain:
+          type: object
+          properties:
+            id:
+              type: string
+              description: ID of the chain to interact with
+              enum:
+                - ksm
+                - ksm-hub
+                - nodl
+                - astr
+                - dot
+                - dot-hub
+                - bnc
+
+    ChainConfig:
+      required:
+        - id
+      properties:
+        id:
+          type: string
+          description: ID of the chain to interact with
+          enum:
+            - ksm
+            - ksm-hub
+            - nodl
+            - astr
+            - dot
+            - dot-hub
+            - bnc
     Chains:
       required:
         - id
@@ -101,7 +138,7 @@ components:
       properties:
         id:
           type: string
-          description: Chain ID to use on other endpoints
+          description: Chain ID
         name:
           type: string
           description: Chain name
