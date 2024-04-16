@@ -4,7 +4,7 @@ FROM rust:1.74-bookworm as builder_rust
 # Set the working directory in the container
 WORKDIR /app
 
-RUN apt update && apt install -y node curl
+RUN apt update && apt install -y nodejs curl
 
 # Copy the Rust source files
 COPY rust ./rust
