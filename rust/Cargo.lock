@@ -168,9 +168,9 @@ checksum = "5443807d6dff69373d433ab9ef5378ad8df50ca6298caf15de6e52e24aaf54d5"
 
 [[package]]
 name = "external-memory-tools"
-version = "0.1.0"
+version = "0.1.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "196d91dff4eb397cd649666a52a6346783d7d6629dd44f1bbaf3157ada166ff3"
+checksum = "cf172ba7bfe5412e03c4dfd7d8e4b5f1e6cd0b7087fd61fa274b73f87ad94854"
 
 [[package]]
 name = "fixed-hash"
@@ -314,18 +314,18 @@ dependencies = [
 
 [[package]]
 name = "merkle-cbt-lean"
-version = "0.1.0"
+version = "0.1.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "a90fc647cee1475178e92627f979fa7cbf347c6df9d1d3b3704129a03a5cbdd5"
+checksum = "5a7a0f5d2b128c0097dc13e4961f3beab11837560f5cb75f871cca0d934a9668"
 dependencies = [
  "external-memory-tools",
 ]
 
 [[package]]
 name = "metadata-shortener"
-version = "0.2.0"
+version = "0.2.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "ee0527afd1cee46001fcfe7bbe7b43e6432a73704bffd7d1ad25e8385ddc957f"
+checksum = "6632de42bde7fdcd6fa97df54bd9d5b2be494589ec435c29bf2a7758e7decd36"
 dependencies = [
  "blake3",
  "external-memory-tools",
@@ -424,6 +424,12 @@ dependencies = [
 ]
 
 [[package]]
+name = "ppv-lite86"
+version = "0.2.17"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "5b40af805b3121feab8a3c29f04d8ad262fa8e0561883e7653e024ae4479e6de"
+
+[[package]]
 name = "primitive-types"
 version = "0.12.2"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -476,6 +482,36 @@ name = "radium"
 version = "0.7.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "dc33ff2d4973d518d823d61aa239014831e521c75da58e3df4840d3f47749d09"
+
+[[package]]
+name = "rand"
+version = "0.8.5"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "34af8d1a0e25924bc5b7c43c079c942339d8f0a8b57c39049bef581b46327404"
+dependencies = [
+ "libc",
+ "rand_chacha",
+ "rand_core",
+]
+
+[[package]]
+name = "rand_chacha"
+version = "0.3.1"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "e6c10a63a0fa32252be49d21e7709d4d4baf8d231c2dbce1eaa8141b9b127d88"
+dependencies = [
+ "ppv-lite86",
+ "rand_core",
+]
+
+[[package]]
+name = "rand_core"
+version = "0.6.4"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "ec0be4795e2f6a28069bec0b5ff3e2ac9bafc99e6a9a7dc3547996c5c816922c"
+dependencies = [
+ "getrandom",
+]
 
 [[package]]
 name = "scale-info"
@@ -542,9 +578,9 @@ checksum = "e6ecd384b10a64542d77071bd64bd7b231f4ed5940fba55e98c3de13824cf3d7"
 
 [[package]]
 name = "sp-arithmetic"
-version = "23.0.0"
+version = "24.0.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "f42721f072b421f292a072e8f52a3b3c0fbc27428f0c9fe24067bc47046bad63"
+checksum = "afa823ca5adc490d47dccb41d69ad482bc57a317bd341de275868378f48f131c"
 dependencies = [
  "integer-sqrt",
  "num-traits",
@@ -556,9 +592,18 @@ dependencies = [
 
 [[package]]
 name = "sp-core-hashing"
-version = "15.0.0"
+version = "16.0.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "1e0f4990add7b2cefdeca883c0efa99bb4d912cb2196120e1500c0cc099553b0"
+checksum = "7f812cb2dff962eb378c507612a50f1c59f52d92eb97b710f35be3c2346a3cd7"
+dependencies = [
+ "sp-crypto-hashing",
+]
+
+[[package]]
+name = "sp-crypto-hashing"
+version = "0.1.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "bc9927a7f81334ed5b8a98a4a978c81324d12bd9713ec76b5c68fd410174c5eb"
 dependencies = [
  "blake2b_simd",
  "byteorder",
@@ -582,9 +627,9 @@ checksum = "a2eb9349b6444b326872e140eb1cf5e7c522154d69e7a0ffb0fb81c06b37543f"
 
 [[package]]
 name = "substrate_parser"
-version = "0.5.0"
+version = "0.6.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "a621482b5606979e590a7d50eca177a49af24840e700e61dc427f78450befa37"
+checksum = "3692eaf5785c67a07d884a3308c783916307300085fe160b8d9277b389505fb9"
 dependencies = [
  "base58",
  "bitvec",
@@ -670,6 +715,7 @@ checksum = "97fee6b57c6a41524a810daee9286c02d7752c4253064d0b05472833a438f675"
 dependencies = [
  "cfg-if",
  "digest",
+ "rand",
  "static_assertions",
 ]
 

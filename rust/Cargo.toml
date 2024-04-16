@@ -16,7 +16,7 @@ frame-metadata = { version = "16.0.0", default-features = false, features = [
   "decode",
 ] }
 hex = "0.4.3"
-metadata-shortener = { version = "0.2.0", default-features = false, features = [
+metadata-shortener = { version = "0.2.1", default-features = false, features = [
   "merkle-standard",
   "proof-gen",
 ] }
