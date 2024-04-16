@@ -4,7 +4,8 @@ FROM rust:1.74-bookworm as builder_rust
 # Set the working directory in the container
 WORKDIR /app
 
-RUN apt update && apt install -y nodejs curl corepack
+RUN apt update && apt install -y nodejs curl npm
+RUN npm install --global corepack
 RUN corepack enable
 
 # Copy package.json, yarn.lock
