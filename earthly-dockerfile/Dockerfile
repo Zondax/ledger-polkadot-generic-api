@@ -7,6 +7,9 @@ WORKDIR /app
 RUN apt update && apt install -y nodejs curl npm
 RUN npm install --global yarn
 
+# Copy package.json, yarn.lock
+COPY package.json yarn.lock ./
+
 # Copy the Rust source files
 COPY rust ./rust
 
