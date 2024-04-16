@@ -98,10 +98,10 @@ export function createAndServe() {
   app.post('/transaction/metadata', (req, res) => {
     const {
       txBlob: blob,
-      chain: { id: ChainId },
+      chain: { id: chainId },
     }: TxToSign = req.body
 
-    const chain = CHAINS.find((b: CHAIN) => b.id === ChainId)
+    const chain = CHAINS.find((b: CHAIN) => b.id === chainId)
     if (!chain) {
       res.status(404).send('chain not found')
       return
