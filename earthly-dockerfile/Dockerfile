@@ -34,8 +34,8 @@ RUN yarn install --production
 
 # Copy the transpiled JavaScript from the builder stage
 COPY --from=builder /app/dist ./dist
-COPY --from=builder /app/rust/index.node ./rust/
-COPY --from=builder /app/rust/index.d.ts ./rust/
+COPY --from=builder /app/rust/index.node ./dist/rust/
+COPY --from=builder /app/rust/index.d.ts ./dist/rust/
 
 # Set the command to start the node server
-CMD ["node", "dist/index.js"]
+CMD ["node", "dist/src/index.js"]
