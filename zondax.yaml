@@ -1,0 +1,5 @@
+projectName: ledger-polkadot-generic-api
+templates:
+  - template: templates/publish-earthly
+  - template: templates/basic-ts
+  - template: templates/earthly-dockerfile

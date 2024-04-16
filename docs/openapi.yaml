@@ -1,0 +1,88 @@
+openapi: 3.0.0
+info:
+  title: Ledger Polkadot Generic API
+  description: This API provides a way to generate the required shortened metadata to sign a transaction on a Ledger device.  
+  version: 1.0.0
+servers:
+  - url: https://api.zondax.ch/dot/generic
+    description: Production server
+paths:
+  /{chain}/metadata/flush:
+    get:
+      summary: Flush cache
+      description: Flush cache for a specific chain
+      parameters:
+        - name: chain
+          in: path
+          required: true
+          description: Ticket of the chain
+          schema:
+            type: string
+      responses:
+        '200':
+          description: The cache was flushed successfully 
+        '404':
+          description: Chain not found
+  /{chain}/metadata:
+    get:
+      summary: Retrieve complete node metadata
+      description: Retrieve and cache complete metadata for a specific chain
+      parameters:
+        - name: chain
+          in: path
+          required: true
+          description: Ticket of the chain
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Chain metadata
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Metadata'
+        '404':
+          description: Chain not found
+  /{chain}/transaction/metadata:
+    post:
+      summary: Retrieve shortened metadata for a tx
+      description: Retrieve shortened metadata, required to sign a tx on the ledger device
+      parameters:
+        - name: chain
+          in: path
+          required: true
+          description: Ticket of the chain
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TxToSign'
+      responses:
+        '200':
+          description: Shortened metadata to sign tx
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ShortenedMetadata'
+        '404':
+          description: Chain not found
+components:
+  schemas:
+    Metadata:
+      type: object
+    ShortenedMetadata:
+      type: object
+    TxToSign:
+      required:
+        - blob
+      properties:
+        blob:
+          type: string
+          description: Transaction payload to be signed, in serialized format
+        nodeApiUrl:
+          type: string
+          description: Node url to get the metadata and complemetary data from. This data is required to generate the shortened metadata for this particular tx.
+    

@@ -1,0 +1,32 @@
+name: Build
+on: [ push ]
+
+jobs:
+  build:
+    timeout-minutes: 5
+    runs-on: zondax-runners
+    container:
+      image: rust:1.74-bookworm
+      options: --tty
+    steps:
+      - name: Install deps
+        run: |
+          apt update
+          apt install -y git
+      - name: Checkout
+        uses: actions/checkout@v3
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - name: Install dependencies
+        run: |
+          npm -g install yarn
+          yarn install
+      - name: Run formatter
+        run: yarn format
+      - name: Run linter
+        run: yarn lint
+      - name: Run build
+        run: yarn build
+      - name: Run Tests
+        run: yarn test
