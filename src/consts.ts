@@ -2,6 +2,7 @@ import type { ChainProps } from './types'
 import type { MetadataV15 } from '@polkadot/types/interfaces/metadata'
 
 export type CHAIN = {
+  id: string
   name: string
   apiWs: string
   metadata?: MetadataV15
@@ -19,31 +20,38 @@ const BNC_WSS = 'wss://bifrost-polkadot.api.onfinality.io/public-ws'
 
 export const CHAINS: CHAIN[] = [
   {
-    name: 'dot',
+    id: 'dot',
+    name: 'Polkadot',
     apiWs: DOT_WSS,
   },
   {
-    name: 'dot-hub',
+    id: 'dot-hub',
+    name: 'Polkadot Hub',
     apiWs: DOTHUB_WSS,
   },
   {
-    name: 'ksm',
+    id: 'ksm',
+    name: 'Kusama',
     apiWs: KSM_WSS,
   },
   {
-    name: 'ksm-hub',
+    id: 'ksm-hub',
+    name: 'Kusama Hub',
     apiWs: KSMHUB_WSS,
   },
   {
-    name: 'nodl',
+    id: 'nodl',
+    name: 'Nodle',
     apiWs: NODL_WSS,
   },
   {
-    name: 'bnc',
+    id: 'bnc',
+    name: 'Bifrost',
     apiWs: BNC_WSS,
   },
   {
-    name: 'astr',
+    id: 'astr',
+    name: 'Astar',
     apiWs: ASTR_WSS,
   },
 ]

@@ -1,18 +1,29 @@
 openapi: 3.0.0
 info:
   title: Ledger Polkadot Generic API
-  description: This API provides a way to generate the required shortened metadata to sign a transaction on a Ledger device.  
-  version: 1.0.0
+  description: This API provides a way to generate the required shortened metadata to sign a transaction on a Ledger device.
+  version: 1.1.0
 servers:
   - url: https://api.zondax.ch/dot/generic
     description: Production server
 paths:
-  /{chain}/metadata/flush:
+  /chains:
+    get:
+      summary: Get chains
+      description: Get available chains info
+      responses:
+        '200':
+          description: Chains info available
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Chains'
+  /{chainId}/metadata/flush:
     get:
       summary: Flush cache
       description: Flush cache for a specific chain
       parameters:
-        - name: chain
+        - name: chainId
           in: path
           required: true
           description: Ticket of the chain
@@ -20,15 +31,15 @@ paths:
             type: string
       responses:
         '200':
-          description: The cache was flushed successfully 
+          description: The cache was flushed successfully
         '404':
           description: Chain not found
-  /{chain}/metadata:
+  /{chainId}/metadata:
     get:
       summary: Retrieve complete node metadata
       description: Retrieve and cache complete metadata for a specific chain
       parameters:
-        - name: chain
+        - name: chainId
           in: path
           required: true
           description: Ticket of the chain
@@ -43,12 +54,12 @@ paths:
                 $ref: '#/components/schemas/Metadata'
         '404':
           description: Chain not found
-  /{chain}/transaction/metadata:
+  /{chainId}/transaction/metadata:
     post:
       summary: Retrieve shortened metadata for a tx
       description: Retrieve shortened metadata, required to sign a tx on the ledger device
       parameters:
-        - name: chain
+        - name: chainId
           in: path
           required: true
           description: Ticket of the chain
@@ -82,7 +93,18 @@ components:
         blob:
           type: string
           description: Transaction payload to be signed, in serialized format
-        nodeApiUrl:
+    Chains:
+      required:
+        - id
+        - name
+        - apiWs
+      properties:
+        id:
           type: string
-          description: Node url to get the metadata and complemetary data from. This data is required to generate the shortened metadata for this particular tx.
-    
+          description: Chain ID to use on other endpoints
+        name:
+          type: string
+          description: Chain name
+        apiWs:
+          type: string
+          description: Node API URL used internally to get metadata from
