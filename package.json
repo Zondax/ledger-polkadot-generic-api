@@ -7,6 +7,7 @@
   "scripts": {
     "build": "yarn run build:rust && tsc",
     "build:rust": "cd rust && yarn cargo-cp-artifact -ac get-metadata index.node -- cargo build --release --message-format=json-render-diagnostics",
+    "build:node": "tsc",
     "clean": "yarn run clean:rust && rimraf dist",
     "clean:rust": "cd rust && cargo clean && rm index.node",
     "format": "prettier -w .",
