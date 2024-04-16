@@ -83,10 +83,18 @@ app.post('/:chain/transaction/metadata', (req, res) => {
   }
 
   const { props, metadataHex } = chain
-  const txToSign: TxToSign = req.body
-  const shortMetadata = Buffer.from(getShortMetadata({ blob: txToSign.blob, metadata: metadataHex, props }), 'hex')
+  if (!props || !metadataHex) {
+    res.status(400).send('please, cache metadata first with GET /:chain/metadata')
+    return
+  }
 
-  res.status(200).send({ shortMetadata: shortMetadata.toString('hex') })
+  try {
+    const txToSign: TxToSign = req.body
+    const shortMetadata = Buffer.from(getShortMetadata({ blob: txToSign.blob, metadata: metadataHex, props }), 'hex')
+    res.status(200).send({ shortMetadata: shortMetadata.toString('hex') })
+  } catch (e) {
+    res.status(500).send(e)
+  }
 })
 
 // Set the server to listen on port 3000
