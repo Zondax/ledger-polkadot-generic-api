@@ -23,7 +23,7 @@ interface TxToSign {
 const metadata: CHAIN[] = []
 
 // GET endpoint to retrieve all books
-app.get('/:chain/flush', (req, res) => {
+app.get('/:chain/metadata/flush', (req, res) => {
   const chain = CHAINS.find((b: CHAIN) => b.name === req.params.chain)
   if (!chain) {
     res.status(404).send('chain not found')
@@ -33,7 +33,7 @@ app.get('/:chain/flush', (req, res) => {
   chain.metadata = undefined
   chain.metadataHex = undefined
   chain.props = undefined
-  res.status(200)
+  res.status(200).json('ok')
 })
 
 app.get('/:chain/metadata', async (req, res) => {
@@ -43,11 +43,16 @@ app.get('/:chain/metadata', async (req, res) => {
     return
   }
 
+  if (chain.metadata) {
+    res.status(200).json(chain.metadata)
+    return
+  }
+
   const { apiWs } = chain
   const api = await getApi(apiWs)
 
-  if (api.runtimeMetadata.version !== 15) {
-    res.status(400).json('Only metadata V15 is supported')
+  if (api.runtimeMetadata.version !== 14) {
+    res.status(400).json('Only metadata V14 is supported')
     return
   }
 
@@ -66,7 +71,7 @@ app.get('/:chain/metadata', async (req, res) => {
   chain.metadataHex = metadataV15Hex
   chain.props = props
 
-  res.status(200).json(metadata)
+  res.status(200).json(chain.metadata)
 })
 
 // POST endpoint to add a new book
