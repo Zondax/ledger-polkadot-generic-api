@@ -14,7 +14,10 @@
     "lint": "eslint --max-warnings=0 --ext .js,.ts src",
     "lint:fix": "yarn run lint --fix",
     "start": "yarn run build:rust && ts-node src/index.ts",
-    "test": "jest"
+    "test": "jest",
+    "docker": "yarn docker:build && yarn docker:run",
+    "docker:build": "earthly --ci +all",
+    "docker:run": "docker run -it ledger-polkadot-generic-api"
   },
   "dependencies": {
     "@noble/hashes": "1.3.3",
@@ -22,7 +25,7 @@
     "@scure/base": "1.1.5",
     "body-parser": "^1.20.2",
     "express": "^4.19.2",
-    "scale-ts": "1.4.3"
+    "scale-ts": "1.6.0"
   },
   "devDependencies": {
     "@polkadot/types": "^10.11.2",
