@@ -17,12 +17,22 @@ app.use(bodyParser.json())
 // Book interface
 interface TxToSign {
   blob: string
-  nodeApiUrl?: string
 }
 
-// GET endpoint to retrieve all books
-app.get('/:chain/metadata/flush', (req, res) => {
-  const chain = CHAINS.find((b: CHAIN) => b.name === req.params.chain)
+app.get('/chains', (req, res) => {
+  const chains = CHAINS.map(({ name, id, apiWs }: CHAIN) => {
+    return {
+      name,
+      id,
+      apiWs,
+    }
+  })
+
+  res.status(200).json({ chains })
+})
+
+app.get('/:chainId/metadata/flush', (req, res) => {
+  const chain = CHAINS.find((b: CHAIN) => b.id === req.params.chainId)
   if (!chain) {
     res.status(404).send('chain not found')
     return
@@ -34,8 +44,8 @@ app.get('/:chain/metadata/flush', (req, res) => {
   res.status(200).json('ok')
 })
 
-app.get('/:chain/metadata', async (req, res) => {
-  const chain = CHAINS.find((b: CHAIN) => b.name === req.params.chain)
+app.get('/:chainId/metadata', async (req, res) => {
+  const chain = CHAINS.find((b: CHAIN) => b.id === req.params.chainId)
   if (!chain) {
     res.status(404).send('chain not found')
     return
@@ -75,8 +85,8 @@ app.get('/:chain/metadata', async (req, res) => {
 })
 
 // POST endpoint to add a new book
-app.post('/:chain/transaction/metadata', (req, res) => {
-  const chain = CHAINS.find((b: CHAIN) => b.name === req.params.chain)
+app.post('/:chainId/transaction/metadata', (req, res) => {
+  const chain = CHAINS.find((b: CHAIN) => b.id === req.params.chainId)
   if (!chain) {
     res.status(404).send('chain not found')
     return
