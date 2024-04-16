@@ -20,8 +20,6 @@ interface TxToSign {
   nodeApiUrl?: string
 }
 
-const metadata: CHAIN[] = []
-
 // GET endpoint to retrieve all books
 app.get('/:chain/metadata/flush', (req, res) => {
   const chain = CHAINS.find((b: CHAIN) => b.name === req.params.chain)
@@ -57,7 +55,9 @@ app.get('/:chain/metadata', async (req, res) => {
   }
 
   const metadataV15Hex = await api.call.metadata.metadataAtVersion<Option<OpaqueMetadata>>(15).then(m => {
-    if (!m.isNone) return m.unwrap().toHex().slice(2)
+    if (!m.isNone) {
+      return m.unwrap().toHex().slice(2)
+    }
   })
 
   if (!metadataV15Hex) {

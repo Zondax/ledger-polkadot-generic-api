@@ -1,9 +1,12 @@
+import type { ChainProps } from './types'
+import type { MetadataV15 } from '@polkadot/types/interfaces/metadata'
+
 export type CHAIN = {
   name: string
   apiWs: string
-  metadata?: any
-  metadataHex?: any
-  props?: any
+  metadata?: MetadataV15
+  metadataHex?: string
+  props?: ChainProps
 }
 
 const DOT_WSS = 'wss://rpc.polkadot.io'
