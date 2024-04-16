@@ -10,6 +10,7 @@ RUN corepack enable
 
 # Copy package.json, yarn.lock
 COPY package.json yarn.lock ./
+RUN yarn install
 
 # Copy the Rust source files
 COPY rust ./rust
