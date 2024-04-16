@@ -4800,7 +4800,7 @@ __metadata:
     jest: "npm:^29.7.0"
     prettier: "npm:^3.2.5"
     rimraf: "npm:^5.0.5"
-    scale-ts: "npm:1.4.3"
+    scale-ts: "npm:1.6.0"
     ts-jest: "npm:^29.1.2"
     ts-node: "npm:^10.9.2"
     typescript: "npm:5.2.2"
@@ -5838,10 +5838,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"scale-ts@npm:1.4.3":
-  version: 1.4.3
-  resolution: "scale-ts@npm:1.4.3"
-  checksum: 10c0/521b52b9152e906611752b7eff5cb6b59d90ea42b2f8a87b0fcf63df4007059cda717fd6e7ca8926a8894dca5e152f159ae11e1dd128084d5cbe5cbe704ff84f
+"scale-ts@npm:1.6.0":
+  version: 1.6.0
+  resolution: "scale-ts@npm:1.6.0"
+  checksum: 10c0/ce4ea3559c6b6bdf2a62454aac83cc3151ae93d1a507ddb8e95e83ce1190085aed61c46901bd42d41d8f8ba58279d7e37057c68c2b674c2d39b8cf5d169e90dd
   languageName: node
   linkType: hard
 
