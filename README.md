@@ -98,5 +98,3 @@ Guidelines for how to contribute to the project. You can detail how to fork the 
 
 ## License
 Apache 2.0
-
-```
