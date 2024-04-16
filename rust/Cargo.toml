@@ -1,0 +1,31 @@
+[package]
+name = "get-metadata"
+version = "0.1.0"
+license = "Apache-2.0"
+edition = "2021"
+exclude = ["index.node"]
+
+[lib]
+crate-type = ["cdylib"]
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+frame-metadata = { version = "16.0.0", default-features = false, features = [
+  "current",
+  "decode",
+] }
+hex = "0.4.3"
+metadata-shortener = { version = "0.2.0", default-features = false, features = [
+  "merkle-standard",
+  "proof-gen",
+] }
+parity-scale-codec = { version = "3.6.9", default-features = false, features = [
+  "derive",
+  "bit-vec",
+] }
+
+[dependencies.neon]
+version = "1.0.0-alpha.4"
+default-features = false
+features = ["napi-8"]
