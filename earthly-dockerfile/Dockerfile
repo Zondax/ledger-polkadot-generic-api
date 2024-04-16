@@ -38,4 +38,4 @@ COPY --from=builder /app/rust/index.node ./rust/
 COPY --from=builder /app/rust/index.d.ts ./rust/
 
 # Set the command to start the node server
-CMD ["node", "dist/index.js"]
+CMD ["node", "dist/src/index.js"]
