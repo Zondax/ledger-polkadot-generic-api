@@ -4,7 +4,7 @@ import type { MetadataV15 } from '@polkadot/types/interfaces/metadata'
 export type CHAIN = {
   id: string
   name: string
-  apiWs: string
+  url: string
   metadata?: MetadataV15
   metadataHex?: string
   props?: ChainProps
@@ -22,36 +22,36 @@ export const CHAINS: CHAIN[] = [
   {
     id: 'dot',
     name: 'Polkadot',
-    apiWs: DOT_WSS,
+    url: DOT_WSS,
   },
   {
     id: 'dot-hub',
     name: 'Polkadot Hub',
-    apiWs: DOTHUB_WSS,
+    url: DOTHUB_WSS,
   },
   {
     id: 'ksm',
     name: 'Kusama',
-    apiWs: KSM_WSS,
+    url: KSM_WSS,
   },
   {
     id: 'ksm-hub',
     name: 'Kusama Hub',
-    apiWs: KSMHUB_WSS,
+    url: KSMHUB_WSS,
   },
   {
     id: 'nodl',
     name: 'Nodle',
-    apiWs: NODL_WSS,
+    url: NODL_WSS,
   },
   {
     id: 'bnc',
     name: 'Bifrost',
-    apiWs: BNC_WSS,
+    url: BNC_WSS,
   },
   {
     id: 'astr',
     name: 'Astar',
-    apiWs: ASTR_WSS,
+    url: ASTR_WSS,
   },
 ]

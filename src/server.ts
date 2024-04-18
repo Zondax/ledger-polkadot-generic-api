@@ -26,11 +26,11 @@ export function createAndServe() {
   app.use(bodyParser.json())
 
   app.get('/chains', (req, res) => {
-    const chains = CHAINS.map(({ name, id, apiWs }: CHAIN) => {
+    const chains = CHAINS.map(({ name, id, url }: CHAIN) => {
       return {
         name,
         id,
-        apiWs,
+        url: url,
       }
     })
 
