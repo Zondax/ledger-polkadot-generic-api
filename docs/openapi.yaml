@@ -2,7 +2,7 @@ openapi: 3.0.0
 info:
   title: Ledger Polkadot Generic API
   description: This API provides a way to generate the required shortened metadata to sign a transaction on a Ledger device.
-  version: 1.2.0
+  version: 1.2.1
 servers:
   - url: https://api.zondax.ch/dot/generic
     description: Production server
@@ -90,8 +90,13 @@ components:
   schemas:
     Metadata:
       type: object
+      description: JSON metadata retrieved from the node
     ShortenedMetadata:
       type: object
+      properties:
+        shortenedMetadata:
+          type: string
+          description: Tx shortened metadata on hex format
     TxPayload:
       required:
         - txBlob
@@ -134,7 +139,7 @@ components:
       required:
         - id
         - name
-        - apiWs
+        - url
       properties:
         id:
           type: string
@@ -142,6 +147,6 @@ components:
         name:
           type: string
           description: Chain name
-        apiWs:
+        url:
           type: string
           description: Node API URL used internally to get metadata from
