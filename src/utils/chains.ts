@@ -14,9 +14,17 @@ export type Chain = {
 }
 
 export type ChainsFile = { chains: Chain[] }
+
 export function loadChains(filePath: string) {
   const file = fs.readFileSync(filePath, 'utf8')
-  const yamlFile = yaml.parse(file, {})
+  const yamlFile = yaml.parse(file)
+
+  if (!yamlFile['chains']) throw new Error('invalid chains yaml')
+  if (!(yamlFile['chains'] instanceof Array)) throw new Error('invalid chains yaml')
+  if (
+    !yamlFile['chains'].reduce((isValid, chain) => typeof chain == 'object' && !!chain.id && !!chain.name && !!chain.url && isValid, true)
+  )
+    throw new Error('invalid chains yaml')
 
   return yamlFile as ChainsFile
 }
