@@ -26,7 +26,7 @@ export async function cacheMetadata(chain: Chain) {
 
   chain.metadata = api.runtimeMetadata.asV15
   chain.metadataHex = metadataV15Hex
-  chain.signedExtensionsHex = ''
+  chain.signedExtensionsHex = chain.metadata.extrinsic.signedExtensions.toHex()
   chain.props = props
 
   await api.disconnect()
