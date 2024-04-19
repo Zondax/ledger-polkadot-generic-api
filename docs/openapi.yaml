@@ -100,14 +100,11 @@ components:
     TxPayload:
       required:
         - callData
-        - signedExtensions
         - chainConfig
       properties:
         callData:
           type: string
           description: Transaction payload to be signed, in serialized format
-        signedExtensions:
-          type: string
         chain:
           type: object
           properties:
