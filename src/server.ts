@@ -11,7 +11,7 @@ interface ChainConfig {
 }
 
 interface TxToSign {
-  txBlob: string
+  callData: string
   chain: ChainConfig
 }
 
@@ -78,7 +78,7 @@ export function createAndServe() {
     const {
       chain: { id: chainId },
     }: TxToSign = req.body
-    let { txBlob: blob }: TxToSign = req.body
+    let { callData }: TxToSign = req.body
 
     const chain = chains.find((b: Chain) => b.id === chainId)
     if (!chain) {
@@ -86,8 +86,8 @@ export function createAndServe() {
       return
     }
 
-    let { props, metadataHex } = chain
-    if (!props || !metadataHex) {
+    let { props, metadataHex, signedExtensionsHex } = chain
+    if (!props || !metadataHex || signedExtensionsHex === undefined) {
       const error = await cacheMetadata(chain)
       if (error) {
         res.status(400).json(error.message)
@@ -95,18 +95,21 @@ export function createAndServe() {
       }
     }
 
-    ;({ props, metadataHex } = chain)
-    if (!props || !metadataHex) {
+    ;({ props, metadataHex, signedExtensionsHex } = chain)
+    if (!props || !metadataHex || signedExtensionsHex === undefined) {
       res.status(400).send('please, cache metadata first with POST /node/metadata')
       return
     }
 
     try {
-      if (blob.substring(0, 2) == '0x') {
-        blob = blob.substring(2)
+      if (callData.substring(0, 2) == '0x') {
+        callData = callData.substring(2)
       }
 
-      const txMetadata = Buffer.from(getShortMetadata({ blob, metadata: metadataHex, props }), 'hex')
+      const txMetadata = Buffer.from(
+        getShortMetadata({ callData, signedExtensions: signedExtensionsHex, metadata: metadataHex, props }),
+        'hex',
+      )
       res.status(200).send({ txMetadata: '0x' + txMetadata.toString('hex') })
     } catch (e) {
       res.status(500).send(e)

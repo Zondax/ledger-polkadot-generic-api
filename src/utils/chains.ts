@@ -10,6 +10,7 @@ export type Chain = {
   url: string
   metadata?: MetadataV15
   metadataHex?: string
+  signedExtensionsHex?: string
   props?: ChainProps
 }
 
