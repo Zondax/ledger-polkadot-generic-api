@@ -15,17 +15,8 @@ frame-metadata = { version = "16.0.0", default-features = false, features = [
   "current",
   "decode",
 ] }
-hex = "0.4.3"
-metadata-shortener = { version = "0.2.0", default-features = false, features = [
-  "merkle-standard",
-  "proof-gen",
-] }
-parity-scale-codec = { version = "3.6.9", default-features = false, features = [
-  "derive",
-  "bit-vec",
-] }
-
-[dependencies.neon]
-version = "1.0.0-alpha.4"
-default-features = false
-features = ["napi-8"]
+hex = { version = "0.4.3", default-features = false, features = ["alloc"] }
+merkleized-metadata = { git = "https://github.com/Zondax/merkleized-metadata", default-features = false, rev = "571d396df3be7aa012ad558e047051f74591c474" }
+neon = "1.0.0"
+parity-scale-codec = { version = "3.6.9", default-features = false }
+scale-info = { version = "2.11.1", default-features = false }
