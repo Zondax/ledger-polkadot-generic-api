@@ -1,5 +1,7 @@
 export interface ChainProps {
-  base58prefix: number
+  base58Prefix: number
   decimals: number
-  unit: string
+  tokenSymbol: string
+  specName: string
+  specVersion: number
 }
