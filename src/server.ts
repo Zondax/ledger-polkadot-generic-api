@@ -102,6 +102,15 @@ export function createAndServe() {
       return
     }
 
+    if (!callData) {
+      res.status(400).send('callData is missing')
+      return
+    }
+    if (!signedExtensions) {
+      res.status(400).send('signedExtensions is missing')
+      return
+    }
+
     try {
       if (callData.substring(0, 2) == '0x') {
         callData = callData.substring(2)
