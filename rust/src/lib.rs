@@ -1,7 +1,7 @@
 use frame_metadata::v15::RuntimeMetadataV15;
 use frame_metadata::{RuntimeMetadata, RuntimeMetadataPrefixed};
 use merkleized_metadata::{
-  generate_metadata_digest, generate_proof_for_extrinsic, ExtraInfo, ExtrinsicMetadata,
+  generate_metadata_digest, generate_proof_for_extrinsic_parts, ExtraInfo, ExtrinsicMetadata,
   FrameMetadataPrepared, Proof,
 };
 use neon::prelude::*;
@@ -74,18 +74,15 @@ fn get_short_metadata(mut cx: FunctionContext) -> JsResult<JsString> {
     .downcast::<JsObject, _>(&mut cx)
     .unwrap();
   let specs = get_extra_info(&mut cx, js_props)?;
-  // we need to append two bytes
-  //   - 0 stands for a "length". It's not used at all, that's why we only add a 0 (it's a
-  //     Compact<u32> theoretically)
-  //   - 4 stands for extrinsicVersion 4. We don't fully need it, but the shortener requires it
-  let call_data = [Vec::<u8>::from([0, 4]), hex::decode(call_data_str).unwrap()].concat();
+  // The crate accepts now call data. We don't have to fake the signature info
+  let call_data = hex::decode(call_data_str).unwrap();
   let sig_ext = hex::decode(sig_ext_str).unwrap();
   let metadata = hex::decode(metadata_str).unwrap();
 
   let runtime_meta_v15 = RuntimeMetadataV15::decode(&mut &metadata[5..]).unwrap();
   let runtime_meta = RuntimeMetadata::V15(runtime_meta_v15);
   let registry_proof =
-    match generate_proof_for_extrinsic(&call_data, Some(&sig_ext), &runtime_meta) {
+    match generate_proof_for_extrinsic_parts(&call_data, Some(&sig_ext), &runtime_meta) {
       Ok(x) => x,
       Err(x) => return Ok(cx.string(x)),
     };
@@ -98,6 +95,7 @@ fn get_short_metadata(mut cx: FunctionContext) -> JsResult<JsString> {
   )
     .unwrap()
     .as_type_information()
+    .unwrap()
     .extrinsic_metadata;
 
   let meta_proof = MetadataProof {
