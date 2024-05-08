@@ -20,7 +20,7 @@
     "docker:run": "docker run -it ledger-polkadot-generic-api"
   },
   "dependencies": {
-    "@noble/hashes": "1.3.3",
+    "@noble/hashes": "1.4.0",
     "@polkadot/api": "10.11.2",
     "@scure/base": "1.1.6",
     "body-parser": "^1.20.2",
