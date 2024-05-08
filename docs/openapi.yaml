@@ -99,12 +99,16 @@ components:
           description: Tx shortened metadata on hex format
     TxPayload:
       required:
-        - txBlob
+        - callData
+        - signedExtensions
         - chainConfig
       properties:
-        txBlob:
+        callData:
           type: string
           description: Transaction payload to be signed, in serialized format
+        signedExtensions:
+          type: string
+          description: Signed extensions as complementary data required to the signing process, in serialized format
         chain:
           type: object
           properties:

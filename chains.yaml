@@ -1,0 +1,22 @@
+chains:
+  - id: 'dot'
+    name: 'Polkadot'
+    url: "wss://rpc.polkadot.io"
+  - id: 'dot-hub'
+    name: 'Polkadot Hub'
+    url: "wss://polkadot-asset-hub-rpc.polkadot.io"
+  - id: 'ksm'
+    name: 'Kusama'
+    url: "wss://kusama-rpc.polkadot.io"
+  - id: 'ksm-hub'
+    name: 'Kusama Hub'
+    url: "wss://kusama-asset-hub-rpc.polkadot.io"
+  - id: 'nodl'
+    name: 'Nodle'
+    url: "wss://nodle-parachain.api.onfinality.io/public-ws"
+  - id: 'bnc'
+    name: 'Bifrost'
+    url: "wss://bifrost-polkadot.api.onfinality.io/public-ws"
+  - id: 'astr'
+    name: 'Astar'
+    url: "wss://astar.api.onfinality.io/public-ws"
