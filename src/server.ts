@@ -3,7 +3,7 @@ import bodyParser from 'body-parser'
 import http from 'http'
 
 import { cacheMetadata } from './utils/metadata'
-import { getShortMetadata } from '../rust'
+import { getShortMetadata, getShortMetadataFromTxBlob } from '../rust'
 import { Chain, loadChains } from './utils/chains'
 
 interface ChainConfig {
@@ -11,8 +11,7 @@ interface ChainConfig {
 }
 
 interface TxToSign {
-  callData: string
-  signedExtensions: string
+  txBlob: string
   chain: ChainConfig
 }
 
@@ -79,7 +78,7 @@ export function createAndServe() {
     const {
       chain: { id: chainId },
     }: TxToSign = req.body
-    let { callData, signedExtensions }: TxToSign = req.body
+    let { txBlob }: TxToSign = req.body
 
     const chain = chains.find((b: Chain) => b.id === chainId)
     if (!chain) {
@@ -102,24 +101,17 @@ export function createAndServe() {
       return
     }
 
-    if (!callData) {
-      res.status(400).send('callData is missing')
-      return
-    }
-    if (!signedExtensions) {
-      res.status(400).send('signedExtensions is missing')
+    if (!txBlob) {
+      res.status(400).send('txBlob is missing')
       return
     }
 
     try {
-      if (callData.substring(0, 2) == '0x') {
-        callData = callData.substring(2)
-      }
-      if (signedExtensions.substring(0, 2) == '0x') {
-        signedExtensions = signedExtensions.substring(2)
+      if (txBlob.substring(0, 2) == '0x') {
+        txBlob = txBlob.substring(2)
       }
 
-      const txMetadata = Buffer.from(getShortMetadata({ callData, signedExtensions, metadata: metadataHex, props }), 'hex')
+      const txMetadata = Buffer.from(getShortMetadataFromTxBlob({ txBlob, metadata: metadataHex, props }), 'hex')
       res.status(200).send({ txMetadata: '0x' + txMetadata.toString('hex') })
     } catch (e) {
       res.status(500).send(e)
