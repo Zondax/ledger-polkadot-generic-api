@@ -3,7 +3,7 @@ import bodyParser from 'body-parser'
 import http from 'http'
 
 import { cacheMetadata } from './utils/metadata'
-import { getShortMetadata, getShortMetadataFromTxBlob } from '../rust'
+import { getShortMetadataFromTxBlob } from '../rust'
 import { Chain, loadChains } from './utils/chains'
 
 interface ChainConfig {
