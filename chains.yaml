@@ -20,3 +20,6 @@ chains:
   - id: 'astr'
     name: 'Astar'
     url: "wss://astar.api.onfinality.io/public-ws"
+  - id: 'local'
+    name: 'Local'
+    url: "ws://85.208.51.8:36003"
