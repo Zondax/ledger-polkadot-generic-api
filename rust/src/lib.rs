@@ -9,6 +9,7 @@ use merkleized_metadata::{
 use neon::prelude::*;
 use parity_scale_codec::{Decode, Encode};
 use crate::helper::get_parts_len_from_tx_blob;
+use frame_metadata_hash_extension::EncodeNoneToEmpty;
 
 #[derive(Encode)]
 pub struct MetadataProof {
@@ -84,31 +85,38 @@ fn get_short_metadata(mut cx: FunctionContext) -> JsResult<JsString> {
     let specs = get_extra_info(&mut cx, js_props)?;
     // The crate accepts now call data. We don't have to fake the signature info
     let call_data = hex::decode(call_data_str).unwrap();
-    let sig_ext = SignedExtrinsicData {
-        included_in_signed_data: &array_bytes::hex2bytes(se_included_in_signed_data).unwrap(),
-        included_in_extrinsic: &array_bytes::hex2bytes(se_included_in_extrinsic).unwrap(),
-    };
 
     let metadata = hex::decode(metadata_str).unwrap();
     let runtime_meta_v15 = RuntimeMetadataV15::decode(&mut &metadata[5..]).unwrap();
     let runtime_meta = RuntimeMetadata::V15(runtime_meta_v15);
+
+    // Generates extrinsic_metadata in the same way the crate does
+    let extrinsic_metadata = FrameMetadataPrepared::prepare(
+        &RuntimeMetadataPrefixed::decode(&mut &metadata[..])
+            .unwrap()
+            .1,
+    )
+        .unwrap()
+        .as_type_information()
+        .unwrap()
+        .extrinsic_metadata;
+
+    let check_metadata_hash_extension = EncodeNoneToEmpty(Some(extrinsic_metadata.hash())).encode();
+    let mut included_in_signed_data = array_bytes::hex2bytes(se_included_in_signed_data).unwrap();
+    let included_in_extrinsic =  array_bytes::hex2bytes(se_included_in_extrinsic).unwrap();
+
+    included_in_signed_data.extend(check_metadata_hash_extension);
+
+    let sig_ext = SignedExtrinsicData {
+        included_in_signed_data: &included_in_signed_data,
+        included_in_extrinsic: &included_in_extrinsic,
+    };
 
     let registry_proof =
         match generate_proof_for_extrinsic_parts(&call_data, Some(sig_ext), &runtime_meta) {
             Ok(x) => x,
             Err(x) => return Ok(cx.string(x)),
         };
-
-    // Generates extrinsic_metadata in the same way the crate does
-    let extrinsic_metadata = FrameMetadataPrepared::prepare(
-        &RuntimeMetadataPrefixed::decode(&mut &metadata[..])
-        .unwrap()
-        .1,
-    )
-    .unwrap()
-    .as_type_information()
-    .unwrap()
-    .extrinsic_metadata;
 
     let meta_proof = MetadataProof {
         proof: registry_proof,
