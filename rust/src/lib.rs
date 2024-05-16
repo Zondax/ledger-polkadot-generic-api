@@ -9,7 +9,7 @@ use merkleized_metadata::{
 use neon::prelude::*;
 use parity_scale_codec::{Decode, Encode};
 use crate::helper::get_parts_len_from_tx_blob;
-use frame_metadata_hash_extension::EncodeNoneToEmpty;
+use frame_metadata_hash_extension::CheckMetadataHash;
 
 #[derive(Encode)]
 pub struct MetadataProof {
@@ -144,9 +144,31 @@ fn get_metadata_digest(mut cx: FunctionContext) -> JsResult<JsString> {
     Ok(cx.string(digest))
 }
 
+fn get_check_metadata_hash_ext(mut cx: FunctionContext) -> JsResult<JsString> {
+  let param_obj = cx.argument::<JsObject>(0).unwrap();
+  let metadata_str = param_obj
+    .get_value(&mut cx, "metadata")?
+    .downcast::<JsString, _>(&mut cx)
+    .unwrap()
+    .value(&mut cx);
+  let js_props = param_obj
+    .get_value(&mut cx, "props")?
+    .downcast::<JsObject, _>(&mut cx)
+    .unwrap();
+  let extra_info = get_extra_info(&mut cx, js_props)?;
+  let metadata = hex::decode(metadata_str).unwrap();
+  let runtime_meta_v15 = RuntimeMetadataV15::decode(&mut &metadata[5..]).unwrap();
+  let runtime_meta = RuntimeMetadata::V15(runtime_meta_v15);
+
+  let digest =  generate_metadata_digest(&runtime_meta, extra_info).unwrap();
+
+  Ok(cx.string(hex::encode(CheckMetadataHash::<>::new_with_custom_hash(digest.hash()).encode())))
+}
+
 #[neon::main]
 fn main(mut cx: ModuleContext) -> NeonResult<()> {
     cx.export_function("getShortMetadataFromTxBlob", get_short_metadata_from_tx_blob)?;
     cx.export_function("getMetadataDigest", get_metadata_digest)?;
+    cx.export_function("getCheckMetadataHashExtension", get_check_metadata_hash_ext)?;
     Ok(())
 }
