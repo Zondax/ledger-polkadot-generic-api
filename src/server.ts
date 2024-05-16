@@ -3,7 +3,7 @@ import bodyParser from 'body-parser'
 import http from 'http'
 
 import { cacheMetadata } from './utils/metadata'
-import { getShortMetadataFromTxBlob } from '../rust'
+import { getShortMetadataFromTxBlob, getCheckMetadataHashExtension } from '../rust'
 import { Chain, loadChains } from './utils/chains'
 
 interface ChainConfig {
@@ -111,7 +111,12 @@ export function createAndServe() {
         txBlob = txBlob.substring(2)
       }
 
-      const txMetadata = Buffer.from(getShortMetadataFromTxBlob({ txBlob, metadata: metadataHex, props }), 'hex')
+      const checkMetadataHashExt = getCheckMetadataHashExtension({ metadata: metadataHex, props })
+      console.log(checkMetadataHashExt)
+      const txMetadata = Buffer.from(
+        getShortMetadataFromTxBlob({ txBlob: txBlob + checkMetadataHashExt, metadata: metadataHex, props }),
+        'hex',
+      )
       res.status(200).send({ txMetadata: '0x' + txMetadata.toString('hex') })
     } catch (e) {
       res.status(500).send(e)
