@@ -162,7 +162,10 @@ fn get_check_metadata_hash_ext(mut cx: FunctionContext) -> JsResult<JsString> {
 
   let digest =  generate_metadata_digest(&runtime_meta, extra_info).unwrap();
 
-  Ok(cx.string(hex::encode(CheckMetadataHash::<>::new_with_custom_hash(digest.hash()).encode())))
+    let mut check_metadata_hash_ext = vec![1];
+    check_metadata_hash_ext.extend(digest.hash().encode()).encode();
+
+  Ok(cx.string(hex::encode(check_metadata_hash_ext)))
 }
 
 #[neon::main]

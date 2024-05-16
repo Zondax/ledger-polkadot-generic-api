@@ -113,6 +113,7 @@ export function createAndServe() {
 
       const checkMetadataHashExt = getCheckMetadataHashExtension({ metadata: metadataHex, props })
       console.log(checkMetadataHashExt)
+      console.log(txBlob + checkMetadataHashExt)
       const txMetadata = Buffer.from(
         getShortMetadataFromTxBlob({ txBlob: txBlob + checkMetadataHashExt, metadata: metadataHex, props }),
         'hex',
