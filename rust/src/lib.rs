@@ -56,75 +56,6 @@ fn get_extra_info<'a>(
     })
 }
 
-fn get_short_metadata(mut cx: FunctionContext) -> JsResult<JsString> {
-    let param_obj = cx.argument::<JsObject>(0).unwrap();
-    let call_data_str = param_obj
-        .get_value(&mut cx, "callData")?
-        .downcast::<JsString, _>(&mut cx)
-        .unwrap()
-        .value(&mut cx);
-    let se_included_in_extrinsic = param_obj
-        .get_value(&mut cx, "seIncludedInExtrinsic")?
-        .downcast::<JsString, _>(&mut cx)
-        .unwrap()
-        .value(&mut cx);
-    let se_included_in_signed_data = param_obj
-        .get_value(&mut cx, "seIncludedInSignedData")?
-        .downcast::<JsString, _>(&mut cx)
-        .unwrap()
-        .value(&mut cx);
-    let metadata_str = param_obj
-        .get_value(&mut cx, "metadata")?
-        .downcast::<JsString, _>(&mut cx)
-        .unwrap()
-        .value(&mut cx);
-    let js_props = param_obj
-        .get_value(&mut cx, "props")?
-        .downcast::<JsObject, _>(&mut cx)
-        .unwrap();
-    let specs = get_extra_info(&mut cx, js_props)?;
-    // The crate accepts now call data. We don't have to fake the signature info
-    let call_data = hex::decode(call_data_str).unwrap();
-
-    let metadata = hex::decode(metadata_str).unwrap();
-    let runtime_meta_v15 = RuntimeMetadataV15::decode(&mut &metadata[5..]).unwrap();
-    let runtime_meta = RuntimeMetadata::V15(runtime_meta_v15);
-
-    // Generates extrinsic_metadata in the same way the crate does
-    let extrinsic_metadata = FrameMetadataPrepared::prepare(
-        &RuntimeMetadataPrefixed::decode(&mut &metadata[..])
-            .unwrap()
-            .1,
-    )
-        .unwrap()
-        .as_type_information()
-        .unwrap()
-        .extrinsic_metadata;
-
-    let check_metadata_hash_extension = EncodeNoneToEmpty(Some(extrinsic_metadata.hash())).encode();
-    let mut included_in_signed_data = array_bytes::hex2bytes(se_included_in_signed_data).unwrap();
-    let included_in_extrinsic =  array_bytes::hex2bytes(se_included_in_extrinsic).unwrap();
-
-    included_in_signed_data.extend(check_metadata_hash_extension);
-
-    let sig_ext = SignedExtrinsicData {
-        included_in_signed_data: &included_in_signed_data,
-        included_in_extrinsic: &included_in_extrinsic,
-    };
-
-    let registry_proof =
-        match generate_proof_for_extrinsic_parts(&call_data, Some(sig_ext), &runtime_meta) {
-            Ok(x) => x,
-            Err(x) => return Ok(cx.string(x)),
-        };
-
-    let meta_proof = MetadataProof {
-        proof: registry_proof,
-        extrinsic: extrinsic_metadata,
-        extra_info: specs,
-    };
-    Ok(cx.string(hex::encode(meta_proof.encode())))
-}
 
 fn get_short_metadata_from_tx_blob(mut cx: FunctionContext) -> JsResult<JsString> {
     let param_obj = cx.argument::<JsObject>(0).unwrap();
@@ -215,7 +146,6 @@ fn get_metadata_digest(mut cx: FunctionContext) -> JsResult<JsString> {
 
 #[neon::main]
 fn main(mut cx: ModuleContext) -> NeonResult<()> {
-    cx.export_function("getShortMetadata", get_short_metadata)?;
     cx.export_function("getShortMetadataFromTxBlob", get_short_metadata_from_tx_blob)?;
     cx.export_function("getMetadataDigest", get_metadata_digest)?;
     Ok(())
