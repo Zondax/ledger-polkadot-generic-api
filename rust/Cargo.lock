@@ -1317,7 +1317,7 @@ dependencies = [
  "merkleized-metadata",
  "neon",
  "parity-scale-codec",
- "scale-decode",
+ "scale-decode 0.13.0",
  "scale-info",
 ]
 
@@ -1722,7 +1722,7 @@ dependencies = [
  "blake3",
  "frame-metadata",
  "parity-scale-codec",
- "scale-decode",
+ "scale-decode 0.12.0",
  "scale-info",
 ]
 
@@ -2338,6 +2338,19 @@ name = "scale-decode"
 version = "0.12.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "7e10e0d345101a013ca3af62c2d44d20213d543cc64d96080c68d931e54360c5"
+dependencies = [
+ "derive_more",
+ "parity-scale-codec",
+ "scale-bits",
+ "scale-type-resolver",
+ "smallvec",
+]
+
+[[package]]
+name = "scale-decode"
+version = "0.13.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "b12ebca36cec2a3f983c46295b282b35e5f8496346fb859a8776dad5389e5389"
 dependencies = [
  "derive_more",
  "parity-scale-codec",
