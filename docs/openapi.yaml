@@ -18,6 +18,26 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Chains'
+  /node/props:
+    post:
+      summary: Retrieve node properties
+      description: Retrieve and cache node properties like decimals, token symbol, chain spec, etc
+      parameters:
+        - name: chainId
+          in: path
+          required: true
+          description: Ticket of the chain
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Chain metadata
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ChainProps'
+        '404':
+          description: Chain not found
   /node/metadata/flush:
     post:
       summary: Flush cache
@@ -57,7 +77,27 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ChainConfig'
+                $ref: '#/components/schemas/Metadata'
+        '404':
+          description: Chain not found
+  /node/metadata/hash:
+    post:
+      summary: Retrieve metadata digest hash
+      description: Retrieve hash of metadata + chain props, required to create the CheckMetadataHash signed extension
+      parameters:
+        - name: chainId
+          in: path
+          required: true
+          description: Ticket of the chain
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Chain metadata digest hash
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MetadataHash'
         '404':
           description: Chain not found
   /transaction/metadata:
@@ -97,6 +137,12 @@ components:
         shortenedMetadata:
           type: string
           description: Tx shortened metadata on hex format
+    MetadataHash:
+      type: object
+      properties:
+        metadataHash:
+          type: string
+          description: Metadata digest hash
     TxPayload:
       required:
         - txBlob
@@ -119,7 +165,18 @@ components:
                 - dot
                 - dot-hub
                 - bnc
-
+    ChainProps:
+      properties:
+        base58Prefix:
+          type: number
+        decimals:
+          type: number
+        tokenSymbol:
+          type: string
+        specName:
+          type: string
+        specVersion:
+          type: number
     ChainConfig:
       required:
         - id

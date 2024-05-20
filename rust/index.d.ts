@@ -15,7 +15,5 @@ export interface MetadataParamsTxBlob extends RootHashParams {
 }
 
 export declare function getShortMetadataFromTxBlob(params: MetadataParamsTxBlob): string
-export declare function getCheckMetadataHashExtension(params: RootHashParams): string
 export declare function getShortMetadata(params: MetadataParams): string
 export declare function getMetadataDigest(params: RootHashParams): string
-export declare function getCheckMetadataHashExtension(params: RootHashParams): string

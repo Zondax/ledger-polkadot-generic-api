@@ -3,7 +3,7 @@ import bodyParser from 'body-parser'
 import http from 'http'
 
 import { cacheMetadata } from './utils/metadata'
-import { getShortMetadataFromTxBlob, getCheckMetadataHashExtension } from '../rust'
+import { getShortMetadataFromTxBlob, getMetadataDigest } from '../rust'
 import { Chain, loadChains } from './utils/chains'
 
 interface ChainConfig {
@@ -74,6 +74,62 @@ export function createAndServe() {
     res.status(200).json(chain.metadata)
   })
 
+
+  app.post('/node/metadata/hash', async (req, res) => {
+    const { id: chainId }: ChainConfig = req.body
+
+    const chain = chains.find((b: Chain) => b.id === chainId)
+    if (!chain) {
+      res.status(404).send('chain not found')
+      return
+    }
+
+    let { props, metadataHex } = chain
+    if (!props || !metadataHex === undefined) {
+      const error = await cacheMetadata(chain)
+      if (error) {
+        res.status(400).json(error.message)
+        return
+      }
+    }
+
+    ;({ props, metadataHex } = chain)
+    if (!props || !metadataHex) {
+      res.status(400).send('please, cache metadata first with POST /node/metadata')
+      return
+    }
+
+    const metadataHash = getMetadataDigest({ metadata: metadataHex, props })
+
+    res.status(200).json({ metadataHash })
+  })
+
+  app.post('/node/props', async (req, res) => {
+    const { id: chainId }: ChainConfig = req.body
+
+    const chain = chains.find((b: Chain) => b.id === chainId)
+    if (!chain) {
+      res.status(404).send('chain not found')
+      return
+    }
+
+    let { props } = chain
+    if (!props) {
+      const error = await cacheMetadata(chain)
+      if (error) {
+        res.status(400).json(error.message)
+        return
+      }
+    }
+
+    ;({ props } = chain)
+    if (!props) {
+      res.status(400).send('please, cache metadata first with POST /node/metadata')
+      return
+    }
+
+    res.status(200).json({ ...props })
+  })
   app.post('/transaction/metadata', async (req, res) => {
     const {
       chain: { id: chainId },
@@ -111,11 +167,8 @@ export function createAndServe() {
         txBlob = txBlob.substring(2)
       }
 
-      const checkMetadataHashExt = getCheckMetadataHashExtension({ metadata: metadataHex, props })
-      console.log(checkMetadataHashExt)
-      console.log(txBlob + checkMetadataHashExt)
       const txMetadata = Buffer.from(
-        getShortMetadataFromTxBlob({ txBlob: txBlob + checkMetadataHashExt, metadata: metadataHex, props }),
+        getShortMetadataFromTxBlob({ txBlob, metadata: metadataHex, props }),
         'hex',
       )
       res.status(200).send({ txMetadata: '0x' + txMetadata.toString('hex') })
