@@ -1076,7 +1076,7 @@ dependencies = [
 [[package]]
 name = "frame-metadata-hash-extension"
 version = "0.1.0"
-source = "git+https://github.com/paritytech/polkadot-sdk.git?branch=bkchr-metadata-hash#a6dee1618b580c421d9970f690c0e10f71e7d170"
+source = "git+https://github.com/paritytech/polkadot-sdk.git?branch=bkchr-metadata-hash#73d3981c711aa14e4fc5c0681dded6901c0fe2c2"
 dependencies = [
  "array-bytes",
  "docify",
@@ -1091,7 +1091,7 @@ dependencies = [
 [[package]]
 name = "frame-support"
 version = "28.0.0"
-source = "git+https://github.com/paritytech/polkadot-sdk.git?branch=bkchr-metadata-hash#a6dee1618b580c421d9970f690c0e10f71e7d170"
+source = "git+https://github.com/paritytech/polkadot-sdk.git?branch=bkchr-metadata-hash#73d3981c711aa14e4fc5c0681dded6901c0fe2c2"
 dependencies = [
  "aquamarine",
  "array-bytes",
@@ -1132,7 +1132,7 @@ dependencies = [
 [[package]]
 name = "frame-support-procedural"
 version = "23.0.0"
-source = "git+https://github.com/paritytech/polkadot-sdk.git?branch=bkchr-metadata-hash#a6dee1618b580c421d9970f690c0e10f71e7d170"
+source = "git+https://github.com/paritytech/polkadot-sdk.git?branch=bkchr-metadata-hash#73d3981c711aa14e4fc5c0681dded6901c0fe2c2"
 dependencies = [
  "Inflector",
  "cfg-expr",
@@ -1151,7 +1151,7 @@ dependencies = [
 [[package]]
 name = "frame-support-procedural-tools"
 version = "10.0.0"
-source = "git+https://github.com/paritytech/polkadot-sdk.git?branch=bkchr-metadata-hash#a6dee1618b580c421d9970f690c0e10f71e7d170"
+source = "git+https://github.com/paritytech/polkadot-sdk.git?branch=bkchr-metadata-hash#73d3981c711aa14e4fc5c0681dded6901c0fe2c2"
 dependencies = [
  "frame-support-procedural-tools-derive",
  "proc-macro-crate 3.1.0",
@@ -1163,7 +1163,7 @@ dependencies = [
 [[package]]
 name = "frame-support-procedural-tools-derive"
 version = "11.0.0"
-source = "git+https://github.com/paritytech/polkadot-sdk.git?branch=bkchr-metadata-hash#a6dee1618b580c421d9970f690c0e10f71e7d170"
+source = "git+https://github.com/paritytech/polkadot-sdk.git?branch=bkchr-metadata-hash#73d3981c711aa14e4fc5c0681dded6901c0fe2c2"
 dependencies = [
  "proc-macro2",
  "quote",
@@ -1173,7 +1173,7 @@ dependencies = [
 [[package]]
 name = "frame-system"
 version = "28.0.0"
-source = "git+https://github.com/paritytech/polkadot-sdk.git?branch=bkchr-metadata-hash#a6dee1618b580c421d9970f690c0e10f71e7d170"
+source = "git+https://github.com/paritytech/polkadot-sdk.git?branch=bkchr-metadata-hash#73d3981c711aa14e4fc5c0681dded6901c0fe2c2"
 dependencies = [
  "cfg-if",
  "docify",
@@ -2604,7 +2604,7 @@ checksum = "3c5e1a9a646d36c3599cd173a41282daf47c44583ad367b8e6837255952e5c67"
 [[package]]
 name = "sp-api"
 version = "26.0.0"
-source = "git+https://github.com/paritytech/polkadot-sdk.git?branch=bkchr-metadata-hash#a6dee1618b580c421d9970f690c0e10f71e7d170"
+source = "git+https://github.com/paritytech/polkadot-sdk.git?branch=bkchr-metadata-hash#73d3981c711aa14e4fc5c0681dded6901c0fe2c2"
 dependencies = [
  "hash-db",
  "log",
@@ -2626,7 +2626,7 @@ dependencies = [
 [[package]]
 name = "sp-api-proc-macro"
 version = "15.0.0"
-source = "git+https://github.com/paritytech/polkadot-sdk.git?branch=bkchr-metadata-hash#a6dee1618b580c421d9970f690c0e10f71e7d170"
+source = "git+https://github.com/paritytech/polkadot-sdk.git?branch=bkchr-metadata-hash#73d3981c711aa14e4fc5c0681dded6901c0fe2c2"
 dependencies = [
  "Inflector",
  "blake2",
@@ -2640,7 +2640,7 @@ dependencies = [
 [[package]]
 name = "sp-application-crypto"
 version = "30.0.0"
-source = "git+https://github.com/paritytech/polkadot-sdk.git?branch=bkchr-metadata-hash#a6dee1618b580c421d9970f690c0e10f71e7d170"
+source = "git+https://github.com/paritytech/polkadot-sdk.git?branch=bkchr-metadata-hash#73d3981c711aa14e4fc5c0681dded6901c0fe2c2"
 dependencies = [
  "parity-scale-codec",
  "scale-info",
@@ -2653,7 +2653,7 @@ dependencies = [
 [[package]]
 name = "sp-arithmetic"
 version = "23.0.0"
-source = "git+https://github.com/paritytech/polkadot-sdk.git?branch=bkchr-metadata-hash#a6dee1618b580c421d9970f690c0e10f71e7d170"
+source = "git+https://github.com/paritytech/polkadot-sdk.git?branch=bkchr-metadata-hash#73d3981c711aa14e4fc5c0681dded6901c0fe2c2"
 dependencies = [
  "docify",
  "integer-sqrt",
@@ -2686,7 +2686,7 @@ dependencies = [
 [[package]]
 name = "sp-core"
 version = "28.0.0"
-source = "git+https://github.com/paritytech/polkadot-sdk.git?branch=bkchr-metadata-hash#a6dee1618b580c421d9970f690c0e10f71e7d170"
+source = "git+https://github.com/paritytech/polkadot-sdk.git?branch=bkchr-metadata-hash#73d3981c711aa14e4fc5c0681dded6901c0fe2c2"
 dependencies = [
  "array-bytes",
  "bandersnatch_vrfs",
@@ -2733,7 +2733,7 @@ dependencies = [
 [[package]]
 name = "sp-crypto-ec-utils"
 version = "0.10.0"
-source = "git+https://github.com/paritytech/polkadot-sdk#d5fe478e4fe2d62b0800888ae77b00ff0ba28b28"
+source = "git+https://github.com/paritytech/polkadot-sdk#313fe0f9a277f27a4228634f0fb15a1c3fa21271"
 dependencies = [
  "ark-bls12-377",
  "ark-bls12-377-ext",
@@ -2753,7 +2753,7 @@ dependencies = [
 [[package]]
 name = "sp-crypto-hashing"
 version = "0.1.0"
-source = "git+https://github.com/paritytech/polkadot-sdk.git?branch=bkchr-metadata-hash#a6dee1618b580c421d9970f690c0e10f71e7d170"
+source = "git+https://github.com/paritytech/polkadot-sdk.git?branch=bkchr-metadata-hash#73d3981c711aa14e4fc5c0681dded6901c0fe2c2"
 dependencies = [
  "blake2b_simd",
  "byteorder",
@@ -2766,7 +2766,7 @@ dependencies = [
 [[package]]
 name = "sp-crypto-hashing-proc-macro"
 version = "0.1.0"
-source = "git+https://github.com/paritytech/polkadot-sdk.git?branch=bkchr-metadata-hash#a6dee1618b580c421d9970f690c0e10f71e7d170"
+source = "git+https://github.com/paritytech/polkadot-sdk.git?branch=bkchr-metadata-hash#73d3981c711aa14e4fc5c0681dded6901c0fe2c2"
 dependencies = [
  "quote",
  "sp-crypto-hashing",
@@ -2776,7 +2776,7 @@ dependencies = [
 [[package]]
 name = "sp-debug-derive"
 version = "14.0.0"
-source = "git+https://github.com/paritytech/polkadot-sdk.git?branch=bkchr-metadata-hash#a6dee1618b580c421d9970f690c0e10f71e7d170"
+source = "git+https://github.com/paritytech/polkadot-sdk.git?branch=bkchr-metadata-hash#73d3981c711aa14e4fc5c0681dded6901c0fe2c2"
 dependencies = [
  "proc-macro2",
  "quote",
@@ -2786,7 +2786,7 @@ dependencies = [
 [[package]]
 name = "sp-debug-derive"
 version = "14.0.0"
-source = "git+https://github.com/paritytech/polkadot-sdk#d5fe478e4fe2d62b0800888ae77b00ff0ba28b28"
+source = "git+https://github.com/paritytech/polkadot-sdk#313fe0f9a277f27a4228634f0fb15a1c3fa21271"
 dependencies = [
  "proc-macro2",
  "quote",
@@ -2796,7 +2796,7 @@ dependencies = [
 [[package]]
 name = "sp-externalities"
 version = "0.25.0"
-source = "git+https://github.com/paritytech/polkadot-sdk.git?branch=bkchr-metadata-hash#a6dee1618b580c421d9970f690c0e10f71e7d170"
+source = "git+https://github.com/paritytech/polkadot-sdk.git?branch=bkchr-metadata-hash#73d3981c711aa14e4fc5c0681dded6901c0fe2c2"
 dependencies = [
  "environmental",
  "parity-scale-codec",
@@ -2806,7 +2806,7 @@ dependencies = [
 [[package]]
 name = "sp-externalities"
 version = "0.25.0"
-source = "git+https://github.com/paritytech/polkadot-sdk#d5fe478e4fe2d62b0800888ae77b00ff0ba28b28"
+source = "git+https://github.com/paritytech/polkadot-sdk#313fe0f9a277f27a4228634f0fb15a1c3fa21271"
 dependencies = [
  "environmental",
  "parity-scale-codec",
@@ -2816,7 +2816,7 @@ dependencies = [
 [[package]]
 name = "sp-genesis-builder"
 version = "0.8.0"
-source = "git+https://github.com/paritytech/polkadot-sdk.git?branch=bkchr-metadata-hash#a6dee1618b580c421d9970f690c0e10f71e7d170"
+source = "git+https://github.com/paritytech/polkadot-sdk.git?branch=bkchr-metadata-hash#73d3981c711aa14e4fc5c0681dded6901c0fe2c2"
 dependencies = [
  "parity-scale-codec",
  "scale-info",
@@ -2828,7 +2828,7 @@ dependencies = [
 [[package]]
 name = "sp-inherents"
 version = "26.0.0"
-source = "git+https://github.com/paritytech/polkadot-sdk.git?branch=bkchr-metadata-hash#a6dee1618b580c421d9970f690c0e10f71e7d170"
+source = "git+https://github.com/paritytech/polkadot-sdk.git?branch=bkchr-metadata-hash#73d3981c711aa14e4fc5c0681dded6901c0fe2c2"
 dependencies = [
  "async-trait",
  "impl-trait-for-tuples",
@@ -2841,7 +2841,7 @@ dependencies = [
 [[package]]
 name = "sp-io"
 version = "30.0.0"
-source = "git+https://github.com/paritytech/polkadot-sdk.git?branch=bkchr-metadata-hash#a6dee1618b580c421d9970f690c0e10f71e7d170"
+source = "git+https://github.com/paritytech/polkadot-sdk.git?branch=bkchr-metadata-hash#73d3981c711aa14e4fc5c0681dded6901c0fe2c2"
 dependencies = [
  "bytes",
  "ed25519-dalek",
@@ -2867,7 +2867,7 @@ dependencies = [
 [[package]]
 name = "sp-keystore"
 version = "0.34.0"
-source = "git+https://github.com/paritytech/polkadot-sdk.git?branch=bkchr-metadata-hash#a6dee1618b580c421d9970f690c0e10f71e7d170"
+source = "git+https://github.com/paritytech/polkadot-sdk.git?branch=bkchr-metadata-hash#73d3981c711aa14e4fc5c0681dded6901c0fe2c2"
 dependencies = [
  "parity-scale-codec",
  "parking_lot",
@@ -2878,7 +2878,7 @@ dependencies = [
 [[package]]
 name = "sp-metadata-ir"
 version = "0.6.0"
-source = "git+https://github.com/paritytech/polkadot-sdk.git?branch=bkchr-metadata-hash#a6dee1618b580c421d9970f690c0e10f71e7d170"
+source = "git+https://github.com/paritytech/polkadot-sdk.git?branch=bkchr-metadata-hash#73d3981c711aa14e4fc5c0681dded6901c0fe2c2"
 dependencies = [
  "frame-metadata",
  "parity-scale-codec",
@@ -2888,7 +2888,7 @@ dependencies = [
 [[package]]
 name = "sp-panic-handler"
 version = "13.0.0"
-source = "git+https://github.com/paritytech/polkadot-sdk.git?branch=bkchr-metadata-hash#a6dee1618b580c421d9970f690c0e10f71e7d170"
+source = "git+https://github.com/paritytech/polkadot-sdk.git?branch=bkchr-metadata-hash#73d3981c711aa14e4fc5c0681dded6901c0fe2c2"
 dependencies = [
  "backtrace",
  "lazy_static",
@@ -2898,7 +2898,7 @@ dependencies = [
 [[package]]
 name = "sp-runtime"
 version = "31.0.1"
-source = "git+https://github.com/paritytech/polkadot-sdk.git?branch=bkchr-metadata-hash#a6dee1618b580c421d9970f690c0e10f71e7d170"
+source = "git+https://github.com/paritytech/polkadot-sdk.git?branch=bkchr-metadata-hash#73d3981c711aa14e4fc5c0681dded6901c0fe2c2"
 dependencies = [
  "docify",
  "either",
@@ -2923,7 +2923,7 @@ dependencies = [
 [[package]]
 name = "sp-runtime-interface"
 version = "24.0.0"
-source = "git+https://github.com/paritytech/polkadot-sdk.git?branch=bkchr-metadata-hash#a6dee1618b580c421d9970f690c0e10f71e7d170"
+source = "git+https://github.com/paritytech/polkadot-sdk.git?branch=bkchr-metadata-hash#73d3981c711aa14e4fc5c0681dded6901c0fe2c2"
 dependencies = [
  "bytes",
  "impl-trait-for-tuples",
@@ -2942,7 +2942,7 @@ dependencies = [
 [[package]]
 name = "sp-runtime-interface"
 version = "24.0.0"
-source = "git+https://github.com/paritytech/polkadot-sdk#d5fe478e4fe2d62b0800888ae77b00ff0ba28b28"
+source = "git+https://github.com/paritytech/polkadot-sdk#313fe0f9a277f27a4228634f0fb15a1c3fa21271"
 dependencies = [
  "bytes",
  "impl-trait-for-tuples",
@@ -2961,7 +2961,7 @@ dependencies = [
 [[package]]
 name = "sp-runtime-interface-proc-macro"
 version = "17.0.0"
-source = "git+https://github.com/paritytech/polkadot-sdk.git?branch=bkchr-metadata-hash#a6dee1618b580c421d9970f690c0e10f71e7d170"
+source = "git+https://github.com/paritytech/polkadot-sdk.git?branch=bkchr-metadata-hash#73d3981c711aa14e4fc5c0681dded6901c0fe2c2"
 dependencies = [
  "Inflector",
  "expander",
@@ -2974,7 +2974,7 @@ dependencies = [
 [[package]]
 name = "sp-runtime-interface-proc-macro"
 version = "17.0.0"
-source = "git+https://github.com/paritytech/polkadot-sdk#d5fe478e4fe2d62b0800888ae77b00ff0ba28b28"
+source = "git+https://github.com/paritytech/polkadot-sdk#313fe0f9a277f27a4228634f0fb15a1c3fa21271"
 dependencies = [
  "Inflector",
  "expander",
@@ -2987,7 +2987,7 @@ dependencies = [
 [[package]]
 name = "sp-staking"
 version = "26.0.0"
-source = "git+https://github.com/paritytech/polkadot-sdk.git?branch=bkchr-metadata-hash#a6dee1618b580c421d9970f690c0e10f71e7d170"
+source = "git+https://github.com/paritytech/polkadot-sdk.git?branch=bkchr-metadata-hash#73d3981c711aa14e4fc5c0681dded6901c0fe2c2"
 dependencies = [
  "impl-trait-for-tuples",
  "parity-scale-codec",
@@ -3000,7 +3000,7 @@ dependencies = [
 [[package]]
 name = "sp-state-machine"
 version = "0.35.0"
-source = "git+https://github.com/paritytech/polkadot-sdk.git?branch=bkchr-metadata-hash#a6dee1618b580c421d9970f690c0e10f71e7d170"
+source = "git+https://github.com/paritytech/polkadot-sdk.git?branch=bkchr-metadata-hash#73d3981c711aa14e4fc5c0681dded6901c0fe2c2"
 dependencies = [
  "hash-db",
  "log",
@@ -3020,17 +3020,17 @@ dependencies = [
 [[package]]
 name = "sp-std"
 version = "14.0.0"
-source = "git+https://github.com/paritytech/polkadot-sdk.git?branch=bkchr-metadata-hash#a6dee1618b580c421d9970f690c0e10f71e7d170"
+source = "git+https://github.com/paritytech/polkadot-sdk.git?branch=bkchr-metadata-hash#73d3981c711aa14e4fc5c0681dded6901c0fe2c2"
 
 [[package]]
 name = "sp-std"
 version = "14.0.0"
-source = "git+https://github.com/paritytech/polkadot-sdk#d5fe478e4fe2d62b0800888ae77b00ff0ba28b28"
+source = "git+https://github.com/paritytech/polkadot-sdk#313fe0f9a277f27a4228634f0fb15a1c3fa21271"
 
 [[package]]
 name = "sp-storage"
 version = "19.0.0"
-source = "git+https://github.com/paritytech/polkadot-sdk.git?branch=bkchr-metadata-hash#a6dee1618b580c421d9970f690c0e10f71e7d170"
+source = "git+https://github.com/paritytech/polkadot-sdk.git?branch=bkchr-metadata-hash#73d3981c711aa14e4fc5c0681dded6901c0fe2c2"
 dependencies = [
  "impl-serde",
  "parity-scale-codec",
@@ -3042,7 +3042,7 @@ dependencies = [
 [[package]]
 name = "sp-storage"
 version = "19.0.0"
-source = "git+https://github.com/paritytech/polkadot-sdk#d5fe478e4fe2d62b0800888ae77b00ff0ba28b28"
+source = "git+https://github.com/paritytech/polkadot-sdk#313fe0f9a277f27a4228634f0fb15a1c3fa21271"
 dependencies = [
  "impl-serde",
  "parity-scale-codec",
@@ -3054,7 +3054,7 @@ dependencies = [
 [[package]]
 name = "sp-tracing"
 version = "16.0.0"
-source = "git+https://github.com/paritytech/polkadot-sdk.git?branch=bkchr-metadata-hash#a6dee1618b580c421d9970f690c0e10f71e7d170"
+source = "git+https://github.com/paritytech/polkadot-sdk.git?branch=bkchr-metadata-hash#73d3981c711aa14e4fc5c0681dded6901c0fe2c2"
 dependencies = [
  "parity-scale-codec",
  "tracing",
@@ -3065,7 +3065,7 @@ dependencies = [
 [[package]]
 name = "sp-tracing"
 version = "16.0.0"
-source = "git+https://github.com/paritytech/polkadot-sdk#d5fe478e4fe2d62b0800888ae77b00ff0ba28b28"
+source = "git+https://github.com/paritytech/polkadot-sdk#313fe0f9a277f27a4228634f0fb15a1c3fa21271"
 dependencies = [
  "parity-scale-codec",
  "tracing",
@@ -3076,7 +3076,7 @@ dependencies = [
 [[package]]
 name = "sp-trie"
 version = "29.0.0"
-source = "git+https://github.com/paritytech/polkadot-sdk.git?branch=bkchr-metadata-hash#a6dee1618b580c421d9970f690c0e10f71e7d170"
+source = "git+https://github.com/paritytech/polkadot-sdk.git?branch=bkchr-metadata-hash#73d3981c711aa14e4fc5c0681dded6901c0fe2c2"
 dependencies = [
  "ahash",
  "hash-db",
@@ -3099,7 +3099,7 @@ dependencies = [
 [[package]]
 name = "sp-version"
 version = "29.0.0"
-source = "git+https://github.com/paritytech/polkadot-sdk.git?branch=bkchr-metadata-hash#a6dee1618b580c421d9970f690c0e10f71e7d170"
+source = "git+https://github.com/paritytech/polkadot-sdk.git?branch=bkchr-metadata-hash#73d3981c711aa14e4fc5c0681dded6901c0fe2c2"
 dependencies = [
  "impl-serde",
  "parity-scale-codec",
@@ -3116,7 +3116,7 @@ dependencies = [
 [[package]]
 name = "sp-version-proc-macro"
 version = "13.0.0"
-source = "git+https://github.com/paritytech/polkadot-sdk.git?branch=bkchr-metadata-hash#a6dee1618b580c421d9970f690c0e10f71e7d170"
+source = "git+https://github.com/paritytech/polkadot-sdk.git?branch=bkchr-metadata-hash#73d3981c711aa14e4fc5c0681dded6901c0fe2c2"
 dependencies = [
  "parity-scale-codec",
  "proc-macro2",
@@ -3127,7 +3127,7 @@ dependencies = [
 [[package]]
 name = "sp-wasm-interface"
 version = "20.0.0"
-source = "git+https://github.com/paritytech/polkadot-sdk.git?branch=bkchr-metadata-hash#a6dee1618b580c421d9970f690c0e10f71e7d170"
+source = "git+https://github.com/paritytech/polkadot-sdk.git?branch=bkchr-metadata-hash#73d3981c711aa14e4fc5c0681dded6901c0fe2c2"
 dependencies = [
  "impl-trait-for-tuples",
  "log",
@@ -3137,7 +3137,7 @@ dependencies = [
 [[package]]
 name = "sp-wasm-interface"
 version = "20.0.0"
-source = "git+https://github.com/paritytech/polkadot-sdk#d5fe478e4fe2d62b0800888ae77b00ff0ba28b28"
+source = "git+https://github.com/paritytech/polkadot-sdk#313fe0f9a277f27a4228634f0fb15a1c3fa21271"
 dependencies = [
  "impl-trait-for-tuples",
  "log",
@@ -3147,7 +3147,7 @@ dependencies = [
 [[package]]
 name = "sp-weights"
 version = "27.0.0"
-source = "git+https://github.com/paritytech/polkadot-sdk.git?branch=bkchr-metadata-hash#a6dee1618b580c421d9970f690c0e10f71e7d170"
+source = "git+https://github.com/paritytech/polkadot-sdk.git?branch=bkchr-metadata-hash#73d3981c711aa14e4fc5c0681dded6901c0fe2c2"
 dependencies = [
  "bounded-collections",
  "parity-scale-codec",
@@ -3192,7 +3192,7 @@ checksum = "a2eb9349b6444b326872e140eb1cf5e7c522154d69e7a0ffb0fb81c06b37543f"
 [[package]]
 name = "substrate-bip39"
 version = "0.4.7"
-source = "git+https://github.com/paritytech/polkadot-sdk.git?branch=bkchr-metadata-hash#a6dee1618b580c421d9970f690c0e10f71e7d170"
+source = "git+https://github.com/paritytech/polkadot-sdk.git?branch=bkchr-metadata-hash#73d3981c711aa14e4fc5c0681dded6901c0fe2c2"
 dependencies = [
  "hmac 0.12.1",
  "pbkdf2",
