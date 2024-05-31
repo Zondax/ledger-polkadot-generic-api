@@ -26,6 +26,8 @@ FROM node:20-slim
 # Set the working directory in the container
 WORKDIR /app
 
+RUN corepack enable
+
 # Copy package.json, yarn.lock
 COPY package.json yarn.lock ./
 
