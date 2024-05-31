@@ -15,7 +15,20 @@ export type Chain = {
 
 export type ChainsFile = { chains: Chain[] }
 
-export function loadChains(filePath: string) {
+let chainsFile: ChainsFile | undefined
+
+export const getChains = (): Chain[] => {
+  if (chainsFile) {
+    return chainsFile.chains
+  }
+
+  const fileRead = loadChains('./chains.yaml')
+  chainsFile = fileRead
+
+  return chainsFile.chains
+}
+
+function loadChains(filePath: string) {
   const file = fs.readFileSync(filePath, 'utf8')
   const yamlFile = yaml.parse(file)
 

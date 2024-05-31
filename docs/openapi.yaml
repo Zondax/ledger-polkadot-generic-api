@@ -2,9 +2,9 @@ openapi: 3.0.0
 info:
   title: Ledger Polkadot Generic API
   description: This API provides a way to generate the required shortened metadata to sign a transaction on a Ledger device.
-  version: 1.2.1
+  version: 1.3.0
 servers:
-  - url: https://api.zondax.ch/dot/generic
+  - url: https://api.zondax.ch/polkadot
     description: Production server
 paths:
   /chains:
@@ -38,6 +38,10 @@ paths:
                 $ref: '#/components/schemas/ChainProps'
         '404':
           description: Chain not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorFound'
   /node/metadata/flush:
     post:
       summary: Flush cache
@@ -60,6 +64,10 @@ paths:
           description: The cache was flushed successfully
         '404':
           description: Chain not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorFound'
   /node/metadata:
     post:
       summary: Retrieve complete node metadata
@@ -80,6 +88,10 @@ paths:
                 $ref: '#/components/schemas/Metadata'
         '404':
           description: Chain not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorFound'
   /node/metadata/hash:
     post:
       summary: Retrieve metadata digest hash
@@ -100,6 +112,10 @@ paths:
                 $ref: '#/components/schemas/MetadataHash'
         '404':
           description: Chain not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorFound'
   /transaction/metadata:
     post:
       summary: Retrieve shortened metadata for a tx
@@ -124,13 +140,26 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ShortenedMetadata'
+        '400':
+          description: Missing fields on request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorFound'
         '404':
           description: Chain not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorFound'
 components:
   schemas:
     Metadata:
       type: object
-      description: JSON metadata retrieved from the node
+      properties:
+        metadata:
+          type: object
+          description: JSON metadata retrieved from the node
     ShortenedMetadata:
       type: object
       properties:
@@ -167,16 +196,19 @@ components:
                 - bnc
     ChainProps:
       properties:
-        base58Prefix:
-          type: number
-        decimals:
-          type: number
-        tokenSymbol:
-          type: string
-        specName:
-          type: string
-        specVersion:
-          type: number
+        props:
+          type: object
+          properties:
+            base58Prefix:
+              type: number
+            decimals:
+              type: number
+            tokenSymbol:
+              type: string
+            specName:
+              type: string
+            specVersion:
+              type: number
     ChainConfig:
       required:
         - id
@@ -207,3 +239,8 @@ components:
         url:
           type: string
           description: Node API URL used internally to get metadata from
+    ErrorFound:
+      type: object
+      properties:
+        errorMessage:
+          type: string
