@@ -26,11 +26,13 @@ FROM node:20-slim
 # Set the working directory in the container
 WORKDIR /app
 
+RUN corepack enable
+
 # Copy package.json, yarn.lock
 COPY package.json yarn.lock ./
 
 # Install production dependencies only
-RUN yarn install --production
+RUN yarn workspaces focus --production
 
 # Copy the transpiled JavaScript from the builder stage
 COPY --from=builder /app/dist ./dist
