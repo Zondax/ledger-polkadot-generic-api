@@ -4,8 +4,9 @@ const defaultInternalErrorMsg = 'some internal error happened, please try again 
 
 export class ChainError extends Error {}
 
-export const renderError = (res: Response, httpCode: number, e: any) => {
-  res.status(httpCode).json({ errorMessage: e.message })
+export const renderError = (res: Response, httpCode: number, e: unknown) => {
+  const errorMessage = e != null && typeof e == 'object' && 'message' in e ? e.message : defaultInternalErrorMsg
+  res.status(httpCode).json({ errorMessage })
 }
 
 export const renderInternalError = (res: Response, e: unknown) => {

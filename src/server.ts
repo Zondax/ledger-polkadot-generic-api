@@ -2,7 +2,7 @@ import express from 'express'
 import bodyParser from 'body-parser'
 import http from 'http'
 
-import { Chain, getChains } from './utils/chains'
+import { getChains } from './utils/chains'
 import { transactionMetadata } from './handlers/transactionMetadata'
 import { nodeProps } from './handlers/nodeProps'
 import { nodeMetadataHash } from './handlers/nodeMetadataHash'
