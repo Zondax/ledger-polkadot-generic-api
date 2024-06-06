@@ -34,8 +34,6 @@ COPY package.json yarn.lock ./
 # Install production dependencies only
 RUN yarn workspaces focus --production
 
-COPY /app/node_modules .
-
 # Copy the transpiled JavaScript from the builder stage
 COPY --from=builder /app/dist ./dist
 COPY --from=builder /app/rust/index.node ./dist/rust/
