@@ -16,7 +16,7 @@ frame-metadata = { version = "16.0.0", default-features = false, features = [
   "decode",
 ] }
 hex = { version = "0.4.3", default-features = false, features = ["alloc"] }
-merkleized-metadata = { git = "https://github.com/Zondax/merkleized-metadata", default-features = false, rev = "e38f0b153431eb37b79851fe2ff46c74d05dbc92" }
+merkleized-metadata = { git = "https://github.com/Zondax/merkleized-metadata", default-features = false, rev = "298633f2683a4ead4b396e7cd86ca8c239f5596d" }
 neon = "1.0.0"
 parity-scale-codec = { version = "3.6.9", default-features = false }
 scale-info = { version = "2.11.1", default-features = false }
