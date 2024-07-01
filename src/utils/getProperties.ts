@@ -10,15 +10,15 @@ export async function getProperties(api: ApiPromise): Promise<ChainProps> {
   const specName = api.runtimeVersion.specName.toString()
   const specVersion = api.runtimeVersion.specVersion.toNumber()
 
-  if (!base58Prefix) {
+  if (base58Prefix === undefined) {
     throw new ChainError('the base58 prefix was not found for this chain')
   }
 
-  if (!decimals) {
+  if (decimals === undefined) {
     throw new ChainError('the chain decimals were not found for this chain')
   }
 
-  if (!tokenSymbol) {
+  if (tokenSymbol === undefined || tokenSymbol === '') {
     throw new ChainError('the token symbol was not found for this chain')
   }
 
