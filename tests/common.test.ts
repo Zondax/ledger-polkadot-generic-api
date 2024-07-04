@@ -1,5 +1,5 @@
 import { createAndServe } from '../src/server'
-import axios, {Axios, AxiosError, isAxiosError} from 'axios'
+import axios, { isAxiosError } from 'axios'
 import { describe } from 'node:test'
 import http from 'http'
 
@@ -61,21 +61,28 @@ describe('basic api', () => {
       const resp = await axios.post('http://127.0.0.1:3001/transaction/metadata', {
         txBlob:
           '11001c0c591bd5a5f69ae815f6aae85433bf5ef7e703cbb9c8b64bc69731252d4c0121710f001a0000006408de7737c59c238890533af25896a2c20608d8b380bb01029acb392781063eacb0ce6e825b73b46536726994c63f4684fd8a72976e07f551de5954f0df5cb501b6648e3f302d557ff1ee5e6d2462f2c668b1c4ac92db6a05c6ab857372c10a13',
-        chain: {id: 'roc'},
+        chain: { id: 'roc' },
       })
-    }catch(e:any){
-        expect(isAxiosError(e)).toBe(true)
-        expect(!!e.response).toBe(true)
-        expect(!!e.response.data).toBe(true)
-        if(e.response && e.response.data){
-          expect(e.response.status).toBe(500)
-          expect(e.response.data.errorMessage).toBe("failed to generate shortened metadata: [Failed to decode call: Could not find variant with index 17]")
-        }
+    } catch (e: any) {
+      expect(isAxiosError(e)).toBe(true)
+      expect(!!e.response).toBe(true)
+      expect(!!e.response.data).toBe(true)
+      if (e.response && e.response.data) {
+        expect(e.response.status).toBe(500)
+        expect(e.response.data.errorMessage).toBe(
+          'failed to generate shortened metadata: [Failed to decode call: Could not find variant with index 17]',
+        )
+      }
     }
   })
 
-  test('flush chain metadata', async () => {
+  test('flush chain metadata - lowercase', async () => {
     const resp = await axios.post('http://127.0.0.1:3001/node/metadata/flush', { id: 'roc' })
+    expect(resp.status).toBe(200)
+  })
+
+  test('flush chain metadata - uppercase', async () => {
+    const resp = await axios.post('http://127.0.0.1:3001/node/metadata/flush', { id: 'ROC' })
     expect(resp.status).toBe(200)
   })
 })

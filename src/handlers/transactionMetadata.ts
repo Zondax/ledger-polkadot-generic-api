@@ -5,7 +5,7 @@ import {
   renderGetMetadataFirstError,
   renderInternalError,
   renderMissingTxBlobError,
-  renderShortenerMetadataError
+  renderShortenerMetadataError,
 } from '../utils/errors'
 import { cacheMetadata } from '../utils/metadata'
 import { getShortMetadataFromTxBlob } from '../../rust'
@@ -17,11 +17,11 @@ export const transactionMetadata = async (req: Request, res: Response) => {
   const chains = getChains()
 
   const {
-    chain: { id: chainId },
+    chain: { id: chainId = '' },
   }: TxToSign = req.body
   let { txBlob }: TxToSign = req.body
 
-  const chain = chains.find((b: Chain) => b.id === chainId)
+  const chain = chains.find((b: Chain) => b.id.toLowerCase() === chainId.toLowerCase())
   if (!chain) {
     renderChainNotFoundError(res)
     return
@@ -55,7 +55,7 @@ export const transactionMetadata = async (req: Request, res: Response) => {
 
     const result = getShortMetadataFromTxBlob({ txBlob, metadata: metadataHex, props })
 
-    if(!validHex.test(result)){
+    if (!validHex.test(result)) {
       renderShortenerMetadataError(res, result)
       return
     }

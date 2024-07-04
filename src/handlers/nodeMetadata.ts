@@ -6,9 +6,9 @@ import { ChainConfig } from '../utils/types'
 
 export const nodeMetadata = async (req: Request, res: Response) => {
   const chains = getChains()
-  const { id: chainId }: ChainConfig = req.body
+  const { id: chainId = '' }: ChainConfig = req.body
 
-  const chain = chains.find((b: Chain) => b.id === chainId)
+  const chain = chains.find((b: Chain) => b.id.toLowerCase() === chainId.toLowerCase())
   if (!chain) {
     renderChainNotFoundError(res)
     return
