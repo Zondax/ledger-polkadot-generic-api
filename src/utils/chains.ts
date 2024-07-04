@@ -30,32 +30,37 @@ export const getChains = (): Chain[] => {
   const fileRead = loadChains('./chains.yaml')
   chainsFile = fileRead
 
-  reloadChains()
   return chainsFile.chains
 }
 
-function reloadChains() {
-  if (reloadChainTimer) {
-    return
-  }
-
-  reloadChainTimer = setInterval(async () => {
+export function reloadChainsRegularly() {
+  const fn = async () => {
     if (reloadChainsInProgress) {
       return
     }
 
     reloadChainsInProgress = true
-    for (const chain of getChains()) {
-      try {
-        console.log('reloading chain metadata from chain: ', chain.id)
-        await cacheMetadata(chain)
-        console.log('chain metadata reloaded from chain: ', chain.id)
-      } catch (e) {
-        console.log('error reloading chain metadata from chain: ', chain.id)
-      }
-    }
+    await reloadChains(getChains())
     reloadChainsInProgress = false
-  }, reloadChainMetadataInterval)
+  }
+
+  if (!reloadChainTimer) {
+    reloadChainTimer = setInterval(fn, reloadChainMetadataInterval)
+  }
+
+  return reloadChainTimer
+}
+
+async function reloadChains(chains: Chain[]): Promise<void> {
+  for (const chain of chains) {
+    try {
+      console.log('reloading chain metadata from chain: ', chain.id)
+      await cacheMetadata(chain)
+      console.log('chain metadata reloaded from chain: ', chain.id)
+    } catch (e) {
+      console.log('error reloading chain metadata from chain: ', chain.id)
+    }
+  }
 }
 
 function loadChains(filePath: string) {
