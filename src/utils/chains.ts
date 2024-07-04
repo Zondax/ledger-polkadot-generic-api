@@ -3,6 +3,7 @@ import fs from 'fs'
 import type { MetadataV15 } from '@polkadot/types/interfaces/metadata'
 
 import type { ChainProps } from '../types'
+import { cacheMetadata } from './metadata'
 
 export type Chain = {
   id: string
@@ -15,6 +16,10 @@ export type Chain = {
 
 export type ChainsFile = { chains: Chain[] }
 
+const reloadChainMetadataInterval = 60 * 60 * 1000
+let reloadChainTimer: NodeJS.Timeout | undefined
+let reloadChainsInProgress = false
+
 let chainsFile: ChainsFile | undefined
 
 export const getChains = (): Chain[] => {
@@ -25,7 +30,32 @@ export const getChains = (): Chain[] => {
   const fileRead = loadChains('./chains.yaml')
   chainsFile = fileRead
 
+  reloadChains()
   return chainsFile.chains
+}
+
+function reloadChains() {
+  if (reloadChainTimer) {
+    return
+  }
+
+  reloadChainTimer = setInterval(async () => {
+    if (reloadChainsInProgress) {
+      return
+    }
+
+    reloadChainsInProgress = true
+    for (const chain of getChains()) {
+      try {
+        console.log('reloading chain metadata from chain: ', chain.id)
+        await cacheMetadata(chain)
+        console.log('chain metadata reloaded from chain: ', chain.id)
+      } catch (e) {
+        console.log('error reloading chain metadata from chain: ', chain.id)
+      }
+    }
+    reloadChainsInProgress = false
+  }, reloadChainMetadataInterval)
 }
 
 function loadChains(filePath: string) {
