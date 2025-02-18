@@ -33,8 +33,7 @@ RUN corepack enable
 COPY package.json yarn.lock ./
 COPY .yarn ./.yarn
 
-# Install production dependencies only
-RUN yarn workspaces focus --production
+RUN yarn install
 
 # Copy the transpiled JavaScript from the builder stage
 COPY --from=builder /app/dist ./dist
