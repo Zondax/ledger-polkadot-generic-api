@@ -1,5 +1,5 @@
 # Stage 1: Build Rust
-FROM rust:1.74-bookworm as builder
+FROM rust:1.84-bookworm as builder
 
 # Set the working directory in the container
 WORKDIR /app
