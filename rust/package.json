@@ -11,5 +11,6 @@
   "license": "ISC",
   "devDependencies": {
     "cargo-cp-artifact": "^0.1"
-  }
+  },
+  "packageManager": "yarn@4.6.0"
 }
