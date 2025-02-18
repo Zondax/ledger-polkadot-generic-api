@@ -6,7 +6,7 @@ jobs:
     timeout-minutes: 5
     runs-on: zondax-runners
     container:
-      image: rust:1.74-bookworm
+      image: rust:1.84-bookworm
       options: --tty
     steps:
       - name: Install deps
