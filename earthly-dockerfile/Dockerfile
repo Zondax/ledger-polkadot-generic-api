@@ -16,6 +16,7 @@ RUN yarn install
 COPY rust ./rust
 COPY src ./src
 COPY tsconfig.json ./
+RUN cd rust && yarn install
 
 # Compile Rust project
 RUN yarn build

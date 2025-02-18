@@ -5,17 +5,17 @@
   "types": "dist/index.d.ts",
   "author": "Zondax AG",
   "scripts": {
-    "build": "bun run build:rust && tsc",
-    "build:rust": "bun run --cwd ./rust build",
+    "build": "yarn run build:rust && tsc",
+    "build:rust": "cd rust && yarn run build",
     "build:node": "tsc",
-    "clean": "bun run clean:rust && rimraf dist",
+    "clean": "yarn run clean:rust && rimraf dist",
     "clean:rust": "cd rust && cargo clean && rm index.node",
     "format": "prettier -w .",
     "lint": "eslint --max-warnings=0 --ext .js,.ts src",
-    "lint:fix": "bun run lint --fix",
-    "start": "bun run build:rust && ts-node src/index.ts",
+    "lint:fix": "yarn run lint --fix",
+    "start": "yarn run build:rust && ts-node src/index.ts",
     "test": "jest",
-    "docker": "bun docker:build && bun docker:run",
+    "docker": "yarn docker:build && yarn docker:run",
     "docker:build": "earthly --ci +all",
     "docker:run": "docker run -it ledger-polkadot-generic-api"
   },
@@ -37,7 +37,6 @@
     "@typescript-eslint/eslint-plugin": "^6.21.0",
     "@typescript-eslint/parser": "^7.9.0",
     "axios": "^1.6.8",
-    "cargo-cp-artifact": "^0.1",
     "eslint": "^8.56.0",
     "eslint-config-prettier": "^9.1.0",
     "eslint-config-standard-with-typescript": "^43.0.1",
@@ -50,7 +49,6 @@
     "rimraf": "^5.0.5",
     "ts-jest": "^29.1.2",
     "ts-node": "^10.9.2",
-    "typescript": "5.2.2",
-    "@types/bun": "latest"
+    "typescript": "5.2.2"
   }
 }
