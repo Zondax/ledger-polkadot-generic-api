@@ -17,7 +17,8 @@
     "test": "jest",
     "docker": "yarn docker:build && yarn docker:run",
     "docker:build": "earthly --ci +all",
-    "docker:run": "docker run -it ledger-polkadot-generic-api"
+    "docker:run": "docker run -it ledger-polkadot-generic-api",
+    "postinstall": "cd rust && yarn install"
   },
   "dependencies": {
     "@noble/hashes": "1.4.0",
