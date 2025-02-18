@@ -30,7 +30,7 @@ WORKDIR /app
 RUN corepack enable
 
 # Copy package.json, yarn.lock
-COPY package.json yarn.lock .pnpc.js .pnp.loader.mjs ./
+COPY package.json yarn.lock .pnp.cjs .pnp.loader.mjs ./
 COPY .yarn ./.yarn 
 
 RUN yarn install
