@@ -1,5 +1,5 @@
 # Stage 1: Build Rust
-FROM rust:1.74-bookworm as builder
+FROM rust:1.84-bookworm as builder
 
 # Set the working directory in the container
 WORKDIR /app
@@ -16,6 +16,7 @@ RUN yarn install
 COPY rust ./rust
 COPY src ./src
 COPY tsconfig.json ./
+RUN cd rust && yarn install
 
 # Compile Rust project
 RUN yarn build
@@ -29,11 +30,10 @@ WORKDIR /app
 RUN corepack enable
 
 # Copy package.json, yarn.lock
-COPY package.json yarn.lock .yarnrc.yml ./
-COPY .yarn ./.yarn
+COPY package.json yarn.lock .pnp.cjs .pnp.loader.mjs ./
+COPY .yarn ./.yarn 
 
-# Install production dependencies only
-RUN yarn workspaces focus --production
+RUN yarn install
 
 # Copy the transpiled JavaScript from the builder stage
 COPY --from=builder /app/dist ./dist
