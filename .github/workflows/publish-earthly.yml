@@ -9,14 +9,14 @@ on:
       - master
       - dev
   pull_request:
-    branches: ["*"]
+    branches: ['*']
   release:
     types:
       - created
     tags:
-      - "v[0-9]+"
-      - "v[0-9]+.[0-9]+"
-      - "v[0-9]+.[0-9]+.[0-9]+"
+      - 'v[0-9]+'
+      - 'v[0-9]+.[0-9]+'
+      - 'v[0-9]+.[0-9]+.[0-9]+'
 
 jobs:
   build:

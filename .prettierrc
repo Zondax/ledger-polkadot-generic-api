@@ -5,11 +5,7 @@
   "useTabs": false,
   "printWidth": 140,
   "tabWidth": 2,
-  "importOrder": [
-    "^@(.*)/(.*)$",
-    "^components/(.*)$",
-    "^[./]"
-  ],
+  "importOrder": ["^@(.*)/(.*)$", "^components/(.*)$", "^[./]"],
   "importOrderSeparation": true,
   "importOrderSortSpecifiers": true
 }
