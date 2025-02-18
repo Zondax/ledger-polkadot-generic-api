@@ -17,7 +17,7 @@ export type Chain = {
 export type ChainsFile = { chains: Chain[] }
 
 const reloadChainMetadataInterval = 60 * 60 * 1000
-let reloadChainTimer: NodeJS.Timeout | undefined
+let reloadChainTimer: NodeJS.Timer | undefined
 let reloadChainsInProgress = false
 
 let chainsFile: ChainsFile | undefined
