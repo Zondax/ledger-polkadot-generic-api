@@ -30,7 +30,7 @@ WORKDIR /app
 RUN corepack enable
 
 # Copy package.json, yarn.lock
-COPY package.json yarn.lock .yarnrc.yml ./
+COPY package.json yarn.lock ./
 COPY .yarn ./.yarn
 
 # Install production dependencies only
